@@ -57,6 +57,8 @@ CLIENT = client
 
 BINDIR = .
 
+##### NB: Check if directories exists before you try to use them
+
 # rules begin:
 
 all: $(BINDIR)/$(SERVER) $(BINDIR)/$(CLIENT)
