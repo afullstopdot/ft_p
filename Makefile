@@ -94,19 +94,21 @@ clean:
 	@rm -f $(SERVER_OBJ) $(CLIENT_OBJ)
 	@echo "\033[0;32mCleanup complete\033[0m"
 
+
 .PHONY: fclean
 fclean: clean
 	@echo "\033[0;36mRemoving executables '$(BINDIR)/$(SERVER), $(BINDIR)/$(CLIENT)'\033[0m"
 	@rm -f $(BINDIR)/$(SERVER) $(BINDIR)/$(CLIENT)
 	@echo "\033[0;32mExecutable removed\033[0m"
 
+
 .PHONY: re
 re: fclean all
+
 
 norm:
 	@echo "\033[0;31m[server]: \033[0m\033[0;36mnorming files!\033[0m"
 	@norminette $(SERVER_SRC)
 	@echo "\033[0;33m[client]: \033[0m\033[0;36mnorming files!\033[0m"
 	@norminette $(CLIENT_SRC)
-
 
