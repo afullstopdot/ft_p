@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   read_buffer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 15:11:14 by amarquez          #+#    #+#             */
-/*   Updated: 2017/07/11 15:12:08 by amarquez         ###   ########.fr       */
+/*   Created: 2017/06/21 14:48:03 by amarquez          #+#    #+#             */
+/*   Updated: 2017/06/21 14:48:04 by amarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libftp.h>
 
-#ifndef FT_P_H
-# define FT_P_H
+/*
+** wrapper function for accept
+** NB try to call accept again if connection aborted
+*/
 
-# include <libftp.h>
+int			ft_waccept(int fd, struct sockaddr *sa, socklen_t *salenptr)
+{
+	int		n;
 
-void	ft_interpreter(int, char *);
-void	ft_pwd(int);
-void	str_cli(int);
-
-#endif
+	if ((n = accept(fd, sa, salenptr)) < 0) {
+		ft_err_sys("accept error");
+	}
+	return (n);
+}

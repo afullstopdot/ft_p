@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   socket.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 15:11:14 by amarquez          #+#    #+#             */
-/*   Updated: 2017/07/11 15:12:08 by amarquez         ###   ########.fr       */
+/*   Created: 2017/06/21 14:48:03 by amarquez          #+#    #+#             */
+/*   Updated: 2017/06/21 14:48:04 by amarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libftp.h>
 
-#ifndef FT_P_H
-# define FT_P_H
+/*
+** socket(2) wrapper function
+*/
 
-# include <libftp.h>
+int	ft_wsocket(int family, int type, int protocol)
+{
+	int		n;
 
-void	ft_interpreter(int, char *);
-void	ft_pwd(int);
-void	str_cli(int);
-
-#endif
+	if ((n = socket(family, type, protocol)) < 0) {
+		ft_err_sys("socket error");
+	}
+	return (n);
+}

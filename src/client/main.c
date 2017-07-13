@@ -2,5 +2,18 @@
 
 int main( int argc, char **argv )
 {
-	return (0);
+	int					sockfd;
+	struct sockaddr_in	servaddr;
+
+	if (argc != 2)
+		ft_err_quit("usage: client <IPaddress>");
+	sockfd = ft_wsocket(AF_INET, SOCK_STREAM, 0);
+	ft_set_sockaddr((SA *) &servaddr, AF_INET, SERV_PORT, inet_addr(argv[1]));
+	ft_wconnect(sockfd, (SA *) &servaddr, sizeof(servaddr));
+	while (1) 
+	{
+		ft_display_prompt();
+		str_cli(sockfd);
+	}
+	exit(0);
 }

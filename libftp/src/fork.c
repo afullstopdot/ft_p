@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   read_buffer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 15:11:14 by amarquez          #+#    #+#             */
-/*   Updated: 2017/07/11 15:12:08 by amarquez         ###   ########.fr       */
+/*   Created: 2017/06/21 14:48:03 by amarquez          #+#    #+#             */
+/*   Updated: 2017/06/21 14:48:04 by amarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libftp.h>
 
-#ifndef FT_P_H
-# define FT_P_H
+/*
+** wrapper function for fork
+*/
 
-# include <libftp.h>
+pid_t	ft_wfork(void)
+{
+	pid_t	pid;
 
-void	ft_interpreter(int, char *);
-void	ft_pwd(int);
-void	str_cli(int);
-
-#endif
+	if ((pid = fork()) == -1)
+	{
+		ft_err_sys("fork error");
+	}
+	return (pid);
+}

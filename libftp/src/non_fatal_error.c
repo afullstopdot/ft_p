@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   non_fatal_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 15:11:14 by amarquez          #+#    #+#             */
-/*   Updated: 2017/07/11 15:12:08 by amarquez         ###   ########.fr       */
+/*   Created: 2017/06/21 14:48:03 by amarquez          #+#    #+#             */
+/*   Updated: 2017/06/21 14:48:04 by amarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libftp.h>
 
-#ifndef FT_P_H
-# define FT_P_H
+/* 
+** Nonfatal error related to system call
+** Print message and return 
+*/
 
-# include <libftp.h>
+void	err_ret(char *fmt)
+{
+	printf("ft_p: non-fatal error related to system call occured - %s\n", fmt);
+	return;
+}
 
-void	ft_interpreter(int, char *);
-void	ft_pwd(int);
-void	str_cli(int);
+/* 
+** Nonfatal error unrelated to system call
+** Print message and return 
+*/
 
-#endif
+void	err_msg(char *fmt)
+{
+	printf("ft_p: non-fatal error unrelated to system call occured - %s\n", fmt);
+	return;
+}

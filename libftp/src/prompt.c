@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   read_buffer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 15:11:14 by amarquez          #+#    #+#             */
-/*   Updated: 2017/07/11 15:12:08 by amarquez         ###   ########.fr       */
+/*   Created: 2017/06/21 14:48:03 by amarquez          #+#    #+#             */
+/*   Updated: 2017/06/21 14:48:04 by amarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libftp.h>
 
-#ifndef FT_P_H
-# define FT_P_H
+void	ft_display_prompt(void)
+{
+	char	cwd[255];
 
-# include <libftp.h>
-
-void	ft_interpreter(int, char *);
-void	ft_pwd(int);
-void	str_cli(int);
-
-#endif
+	if (getcwd(cwd, 255))
+	{
+		ft_putstr("\033[0;33m");
+		ft_putstr("lcwd[");
+		ft_putstr(cwd);
+		ft_putstr("]$> ");
+		ft_putstr("\033[0m");
+	}
+	else
+		ft_err_quit("getcwd fail");
+}

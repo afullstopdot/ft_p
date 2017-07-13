@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   getcwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,14 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <libftp.h>
 
-#ifndef FT_P_H
-# define FT_P_H
+char		*ft_wgetcwd(void)
+{
+	char	cwd[255];
 
-# include <libftp.h>
-
-void	ft_interpreter(int, char *);
-void	ft_pwd(int);
-void	str_cli(int);
-
-#endif
+	if (getcwd(cwd, 255))
+	{
+		return ft_strdup(cwd);
+	}
+	else
+		ft_err_quit("getcwd fail");
+	return (NULL);
+}
