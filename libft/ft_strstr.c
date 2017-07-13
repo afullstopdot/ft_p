@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   strstr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 15:11:14 by amarquez          #+#    #+#             */
-/*   Updated: 2017/07/11 15:12:08 by amarquez         ###   ########.fr       */
+/*   Created: 2016/12/19 08:56:18 by amarquez          #+#    #+#             */
+/*   Updated: 2016/12/19 08:56:25 by amarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-#ifndef FT_P_H
-# define FT_P_H
-
-# include <libftp.h>
-
-#endif
+char	*ft_strstr(const char *haystack, const char *needle)
+{
+	return (ft_strnstr(haystack, needle, ft_strlen((char *)haystack)));
+}

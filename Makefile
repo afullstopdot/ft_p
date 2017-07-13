@@ -48,6 +48,14 @@ CLIENT_SRC := $(wildcard $(SRCDIR)/$(CLIENT_DIR)/*.c)
 SERVER_OBJ := $(SERVER_SRC:$(SRCDIR)/$(SERVER_DIR)/%.c=$(OBJDIR)/$(SERVER_DIR)/%.o)
 CLIENT_OBJ := $(CLIENT_SRC:$(SRCDIR)/$(CLIENT_DIR)/%.c=$(OBJDIR)/$(CLIENT_DIR)/%.o)
 
+# libs dependencies
+
+LIBFT 		= -L ./libft -lft
+LIBFTP 		= -L ./libftp -lftp
+LIBFT_H 	= -I libft
+LIBFTP_H 	= -I libftp/inc
+
+
 # Executabe name
 
 SERVER = server
@@ -66,30 +74,33 @@ all: $(BINDIR)/$(SERVER) $(BINDIR)/$(CLIENT)
 
 $(BINDIR)/$(SERVER): $(SERVER_OBJ)
 	@echo "\033[0;31m[server]: \033[0m\033[0;36mLinking object files!\033[0m"
-	@$(LINKER) $(SERVER_OBJ) $(FLAGS) -o $@ 
+	@$(LINKER) $(SERVER_OBJ) $(FLAGS) -o $@ $(LIBFTP) $(LIBFT) -I $(INCDIR) $(LIBFTP_H) $(LIBFT_H)
 	@echo "\033[0;31m[server]: \033[0m\033[0;32mLinking complete!\033[0m"
 
 
 $(SERVER_OBJ): $(OBJDIR)/$(SERVER_DIR)/%.o : $(SRCDIR)/$(SERVER_DIR)/%.c
+	@make --silent -C libftp	
 	@echo "\033[0;31m[server]: \033[0m\033[0;36mCompiling source file "$<"!\033[0m"
-	@$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) -c $< -o $@ $(LIBFTP) $(LIBFT) -I $(INCDIR) $(LIBFTP_H) $(LIBFT_H)
 	@echo "\033[0;31m[server]: \033[0m\033[0;32mCompiled "$<" successfully!\033[0m"
 
 
 $(BINDIR)/$(CLIENT): $(CLIENT_OBJ)
 	@echo "\033[0;33m[client]: \033[0m\033[0;36mLinking object files!\033[0m"
-	@$(LINKER) $(CLIENT_OBJ) $(FLAGS) -o $@ 
+	@$(LINKER) $(CLIENT_OBJ) $(FLAGS) -o $@ $(LIBFTP) $(LIBFT) -I $(INCDIR) $(LIBFTP_H) $(LIBFT_H)
 	@echo "\033[0;33m[client]: \033[0m\033[0;32mLinking complete!\033[0m"
 
 
 $(CLIENT_OBJ): $(OBJDIR)/$(CLIENT_DIR)/%.o : $(SRCDIR)/$(CLIENT_DIR)/%.c
+	@make --silent -C libftp	
 	@echo "\033[0;33m[client]: \033[0m\033[0;36mCompiling source file "$<"!\033[0m"
-	@$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) -c $< -o $@ $(LIBFTP) $(LIBFT) -I $(INCDIR) $(LIBFTP_H) $(LIBFT_H)
 	@echo "\033[0;33m[client]: \033[0m\033[0;32mCompiled "$<" successfully!\033[0m"
 
 
 .PHONY: clean
 clean:
+	@make --silent clean -C libftp	
 	@echo "\033[0;36mRemoving object files\033[0m"
 	@rm -f $(SERVER_OBJ) $(CLIENT_OBJ)
 	@echo "\033[0;32mCleanup complete\033[0m"
@@ -97,6 +108,7 @@ clean:
 
 .PHONY: fclean
 fclean: clean
+	@make --silent fclean -C libftp	
 	@echo "\033[0;36mRemoving executables '$(BINDIR)/$(SERVER), $(BINDIR)/$(CLIENT)'\033[0m"
 	@rm -f $(BINDIR)/$(SERVER) $(BINDIR)/$(CLIENT)
 	@echo "\033[0;32mExecutable removed\033[0m"

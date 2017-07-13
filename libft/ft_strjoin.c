@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   strjoin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 15:11:14 by amarquez          #+#    #+#             */
-/*   Updated: 2017/07/11 15:12:08 by amarquez         ###   ########.fr       */
+/*   Created: 2016/12/19 08:51:00 by amarquez          #+#    #+#             */
+/*   Updated: 2016/12/19 14:59:54 by amarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-#ifndef FT_P_H
-# define FT_P_H
+char		*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*join;
 
-# include <libftp.h>
-
-#endif
+	join = ft_strnew(ft_strlen((char *)s1) + ft_strlen((char *)s2));
+	if (join)
+	{
+		join = ft_strcpy(join, s1);
+		join = ft_strcat(join, s2);
+	}
+	return (join);
+}

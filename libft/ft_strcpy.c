@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   strcpy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 15:11:14 by amarquez          #+#    #+#             */
-/*   Updated: 2017/07/11 15:12:08 by amarquez         ###   ########.fr       */
+/*   Created: 2016/12/19 08:48:21 by amarquez          #+#    #+#             */
+/*   Updated: 2016/12/19 08:48:27 by amarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-#ifndef FT_P_H
-# define FT_P_H
+char		*ft_strcpy(char *dest, const char *src)
+{
+	int		k;
 
-# include <libftp.h>
-
-#endif
+	k = 0;
+	while (src[k])
+	{
+		dest[k] = ((char *)src)[k];
+		k++;
+	}
+	dest[k] = '\0';
+	return (dest);
+}

@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   strmap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 15:11:14 by amarquez          #+#    #+#             */
-/*   Updated: 2017/07/11 15:12:08 by amarquez         ###   ########.fr       */
+/*   Created: 2016/12/19 08:52:37 by amarquez          #+#    #+#             */
+/*   Updated: 2016/12/19 08:52:44 by amarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-#ifndef FT_P_H
-# define FT_P_H
+char		*ft_strmap(char const *s, char (*f)(char))
+{
+	char	*new;
+	size_t	count;
 
-# include <libftp.h>
-
-#endif
+	count = 0;
+	new = ft_strnew(ft_strlen((char *)s));
+	if (new)
+	{
+		while (s[count])
+		{
+			new[count] = f(s[count]);
+			count++;
+		}
+	}
+	return (new);
+}

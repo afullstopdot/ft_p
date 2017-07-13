@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p.h                                             :+:      :+:    :+:   */
+/*   strsub.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amarquez <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/11 15:11:14 by amarquez          #+#    #+#             */
-/*   Updated: 2017/07/11 15:12:08 by amarquez         ###   ########.fr       */
+/*   Created: 2016/12/19 08:56:35 by amarquez          #+#    #+#             */
+/*   Updated: 2016/12/19 08:56:40 by amarquez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
-#ifndef FT_P_H
-# define FT_P_H
+char		*ft_strsub(char const *s, unsigned int start, size_t len)
+{
+	char	*sub;
 
-# include <libftp.h>
-
-#endif
+	sub = ft_strnew(len);
+	if (sub)
+		ft_strncpy(sub, s + start, len);
+	return (sub);
+}
