@@ -6,7 +6,7 @@
 #    By: amarquez <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/20 10:10:12 by amarquez          #+#    #+#              #
-#    Updated: 2017/07/11 17:39:21 by amarquez         ###   ########.fr        #
+#    Updated: 2017/07/14 10:16:06 by amarquez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,9 +43,21 @@ TARGET = libftp.a
 
 BINDIR = .
 
+# OS for linking libraries (linux and os x different)
+OS := $(shell uname)
+ifneq ($(OS),Darwin)
+  LIBFT = -L ../libft -lft
+endif
+
 ##### NB: Check if directories exists before you try to use them
 
 # rules begin:
+all: $(OBJDIR) $(BINDIR)/$(TARGET)
+
+$(OBJDIR):
+	@echo "\033[0;31m[libftp]: \033[0m\033[0;36mCreating "$@" directory!\033[0m"
+	@mkdir -p $@
+	@echo "\033[0;31m[libftp]: \033[0m\033[0;32mComplete!\033[0m"
 
 $(BINDIR)/$(TARGET): $(OBJ)
 	@echo "\033[0;31m[libftp]: \033[0m\033[0;36mLinking object files!\033[0m"
@@ -57,7 +69,7 @@ $(BINDIR)/$(TARGET): $(OBJ)
 $(OBJ): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	@make --silent -C ../libft
 	@echo "\033[0;31m[libftp]: \033[0m\033[0;36mCompiling source file "$<"!\033[0m"
-	@$(CC) $(FLAGS) -c $< -o $@ -L ../libft -lft -I $(INCDIR) -I ../libft
+	@$(CC) $(FLAGS) -c $< -o $@ $(LIBFT) -I $(INCDIR) -I ../libft
 	@echo "\033[0;31m[libftp]: \033[0m\033[0;32mCompiled "$<" successfully!\033[0m"
 
 

@@ -6,7 +6,7 @@
 #    By: amarquez <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/20 10:10:12 by amarquez          #+#    #+#              #
-#    Updated: 2017/07/11 17:39:21 by amarquez         ###   ########.fr        #
+#    Updated: 2017/07/14 10:10:49 by amarquez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,14 @@ LIBFTP_H 	= -I libftp/inc
 SERVER = server
 CLIENT = client
 
+# OS for linking libraries (linux and os x different)
+
+OS := $(shell uname)
+
+ifneq ($(OS),Darwin)
+  LINK = $(LIBFTP) $(LIBFT)
+endif
+
 # Bin directory
 
 BINDIR = .
@@ -69,8 +77,12 @@ BINDIR = .
 
 # rules begin:
 
-all: $(BINDIR)/$(SERVER) $(BINDIR)/$(CLIENT)
+all: $(OBJDIR) $(BINDIR)/$(SERVER) $(BINDIR)/$(CLIENT)
 
+$(OBJDIR):
+	@echo "\033[0;31m[server]: \033[0m\033[0;36mCreating "$@" directory!\033[0m"
+	@mkdir -p $@/$(SERVER_DIR) $@/$(CLIENT_DIR)
+	@echo "\033[0;31m[server]: \033[0m\033[0;32mComplete!\033[0m"
 
 $(BINDIR)/$(SERVER): $(SERVER_OBJ)
 	@echo "\033[0;31m[server]: \033[0m\033[0;36mLinking object files!\033[0m"
@@ -81,7 +93,7 @@ $(BINDIR)/$(SERVER): $(SERVER_OBJ)
 $(SERVER_OBJ): $(OBJDIR)/$(SERVER_DIR)/%.o : $(SRCDIR)/$(SERVER_DIR)/%.c
 	@make --silent -C libftp	
 	@echo "\033[0;31m[server]: \033[0m\033[0;36mCompiling source file "$<"!\033[0m"
-	@$(CC) $(FLAGS) -c $< -o $@ $(LIBFTP) $(LIBFT) -I $(INCDIR) $(LIBFTP_H) $(LIBFT_H)
+	@$(CC) $(FLAGS) -c $< -o $@ $(LINK) -I $(INCDIR) $(LIBFTP_H) $(LIBFT_H)
 	@echo "\033[0;31m[server]: \033[0m\033[0;32mCompiled "$<" successfully!\033[0m"
 
 
@@ -94,7 +106,7 @@ $(BINDIR)/$(CLIENT): $(CLIENT_OBJ)
 $(CLIENT_OBJ): $(OBJDIR)/$(CLIENT_DIR)/%.o : $(SRCDIR)/$(CLIENT_DIR)/%.c
 	@make --silent -C libftp	
 	@echo "\033[0;33m[client]: \033[0m\033[0;36mCompiling source file "$<"!\033[0m"
-	@$(CC) $(FLAGS) -c $< -o $@ $(LIBFTP) $(LIBFT) -I $(INCDIR) $(LIBFTP_H) $(LIBFT_H)
+	@$(CC) $(FLAGS) -c $< -o $@ $(LINK) -I $(INCDIR) $(LIBFTP_H) $(LIBFT_H)
 	@echo "\033[0;33m[client]: \033[0m\033[0;32mCompiled "$<" successfully!\033[0m"
 
 
