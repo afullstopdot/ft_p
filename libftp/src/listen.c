@@ -14,6 +14,10 @@
 
 /*
 ** wrapper function for listen
+**
+** The listen function converts an unconnected socket into a passive socket, 
+** indicating that the kernel should accept incoming connection requests directed 
+** to this socket
 */
 
 void		ft_wlisten(int fd, int backlog)
