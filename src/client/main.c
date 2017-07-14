@@ -13,7 +13,7 @@ int main( int argc, char **argv )
 	while (1) 
 	{
 		ft_display_prompt();
-		str_cli(sockfd);
+		// send req to server
 	}
 	exit(0);
 }
