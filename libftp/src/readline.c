@@ -12,61 +12,65 @@
 
 #include <libftp.h>
 
-static int	read_cnt;
-static char	*read_ptr;
-static char	read_buf[MAXLINE];
-
-static ssize_t	my_read(int fd, char *ptr)
+char	get_char(void)
 {
-	if (read_cnt <= 0)
+	char	c;
+
+	read(0, &c, 1);
+	return (c);
+}
+
+void	resize_str(char **str, size_t new_size)
+{
+	char	*tmp;
+
+	tmp = str[0];
+	str[0] = ft_strnew(new_size);
+	if (str[0] != NULL)
 	{
-		if ((read_cnt = read(fd, read_buf, sizeof(read_buf))) < 0)
-			return (-1);
-		else if (read_cnt == 0)
-			return (0);
-		read_ptr = read_buf;
+		ft_strcpy(str[0], tmp);
+		ft_strdel(&tmp);
 	}
-	read_cnt--;
-	*ptr = *read_ptr++;
-	return(1);
 }
 
-ssize_t			ft_readline(int fd, void *vptr, size_t maxlen)
+char	*ft_readline(void)
 {
-	ssize_t	n, rc;
-	char	c, *ptr;
+	char	*line;
+	char	c;
+	int		loop;
+	int		size;
 
-	ptr = vptr;
-	for (n = 1; n < (ssize_t)maxlen; n++) {
-		if ( (rc = my_read(fd, &c)) == 1) {
-			*ptr++ = c;
-			if (c == '\n')
-				break;	/* newline is stored, like fgets() */
-		} else if (rc == 0) {
-			*ptr = 0;
-			return (n - 1);	/* EOF, n - 1 bytes were read */
-		} else
-			return (-1);		/* error, errno set by read() */
+	loop = 0;
+	size = 10;
+	line = ft_strnew(size);
+	if (line == NULL)
+		return (NULL);
+	while (1)
+	{
+		c = get_char();
+		if (c == '\n' || c == '\0')
+		{
+			line[loop] = '\0';
+			return (line);
+		}
+		line[loop++] = c;
+		if (loop >= size - 1)
+		{
+			size *= 2;
+			resize_str(&line, size);
+		}
 	}
-	*ptr = 0;	/* null terminate like fgets() */
-	return (n);
-}
-
-ssize_t			readlinebuf(void **vptrptr)
-{
-	if (read_cnt)
-		*vptrptr = read_ptr;
-	return (read_cnt);
 }
 
 /*
 ** wrapper for ft_readline
 */
-ssize_t			ft_wreadline(int fd, void *ptr, size_t maxlen)
-{
-	ssize_t		n;
 
-	if ( (n = ft_readline(fd, ptr, maxlen)) < 0)
+char			*ft_wreadline(void)
+{
+	char		*n;
+
+	if (!(n = ft_readline()))
 		ft_err_sys("readline error");
 	return (n);
 }

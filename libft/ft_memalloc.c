@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 void		*ft_memalloc(size_t size)
 {
@@ -21,7 +22,7 @@ void		*ft_memalloc(size_t size)
 	{
 		mem = malloc(size);
 		if (mem)
-			bzero(mem, size);
+			ft_bzero(mem, size);
 	}
 	return (mem);
 }

@@ -6,6 +6,8 @@ int main(void)
 	pid_t				childpid;
 	socklen_t			clilen;
 	struct sockaddr_in	cliaddr, servaddr;
+	char				buff[MAXLINE];
+	char				**argv;
 
 	listenfd = ft_wsocket(AF_INET, SOCK_STREAM, 0);
 	ft_set_sockaddr((SA *) &servaddr, AF_INET, SERV_PORT, htonl(INADDR_ANY));
@@ -18,7 +20,15 @@ int main(void)
 		if ((childpid = ft_wfork()) == 0)
 		{
 			ft_wclose(listenfd);
-			// rec req from client
+			while (ft_wreadn(connfd, buff, MAXLINE)) {
+				if ((argv = ft_strsplit(buff, ' '))) {
+					if (ft_strequ(argv[0], "pwd")) {
+						ft_bzero(buff, MAXLINE);
+						ft_strcpy(buff, ft_wgetcwd());
+						ft_wwriten(connfd, buff, MAXLINE);
+					}
+				}
+			}
 			exit(0);
 		}
 		ft_wclose(connfd);

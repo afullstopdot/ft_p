@@ -38,7 +38,8 @@ ssize_t			ft_writen(int fd, const void *vptr, size_t n)
 
 void			ft_wwriten(int fd, void *ptr, size_t nbytes)
 {
-	if (ft_writen(fd, ptr, nbytes) != (ssize_t)nbytes) {
+	if (ft_writen(fd, ptr, nbytes) != (ssize_t)nbytes) 
+	{
 		ft_err_sys("writen error");
 	}
 }
