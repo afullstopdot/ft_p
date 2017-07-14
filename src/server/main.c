@@ -8,8 +8,9 @@ int main(void)
 	socklen_t			clilen;
 	struct sockaddr_in	cliaddr, servaddr;
 	char				buff[MAXLINE];
-	char				**argv;
+	char				*root;
 
+	root = ft_wgetcwd();
 	/*
 	** create a socket
 	*/
@@ -36,7 +37,7 @@ int main(void)
 	*/
 
 	ft_wlisten(listenfd, BACKLOG);
-	while ( 42 ) 
+	while (42) 
 	{
 		clilen = sizeof(cliaddr);
 
@@ -53,18 +54,38 @@ int main(void)
 
 		if ((childpid = ft_wfork()) == 0)
 		{
+
+			/*
+			** 
+			*/
+
 			ft_wclose(listenfd);
+
+			/*
+			** read from client as long as client is writing
+			*/
+
 			while (ft_wreadn(connfd, buff, MAXLINE)) {
-				if ((argv = ft_strsplit(buff, ' '))) {
-					if (ft_strequ(argv[0], "pwd")) {
-						ft_bzero(buff, MAXLINE);
-						ft_strcpy(buff, ft_wgetcwd());
-						ft_wwriten(connfd, buff, MAXLINE);
-					}
-				}
+
+				/*
+				** use buff to handle client request
+				*/
+
+				ft_handle_request(buff, connfd, root);
+			
 			}
+
+			/*
+			** kill the process
+			*/
+
 			exit(0);
 		}
+
+		/*
+		**
+		*/
+
 		ft_wclose(connfd);
 	}
 	return (0);

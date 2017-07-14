@@ -28,6 +28,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <stdarg.h>
+# include <dirent.h>
 
 /*
 ** application constants
@@ -59,11 +60,15 @@ void			ft_wclose(int);
 void			ft_wconnect(int, const struct sockaddr *, socklen_t);
 void			ft_set_sockaddr(struct sockaddr *, int, int, in_addr_t);
 void			ft_fill_buffer(char *, char *);
+void			ft_check_exit(char *);
 int				ft_wsocket(int, int, int);
 int				ft_waccept(int, struct sockaddr *, socklen_t *);
+int				ft_dstrlen(char **);
 pid_t			ft_wfork(void);
 char			*ft_wgetcwd(void);
 char			*ft_wreadline(void);
+char			*ft_get_environ(char *);
+char			**ft_get_argv(char *);
 
 /*
 ** Error handling

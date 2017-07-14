@@ -57,6 +57,12 @@ int main(int argc, char **argv)
 		ft_fill_buffer(buff, cmd);
 
 		/*
+		** check exit
+		*/
+
+		ft_check_exit(buff);
+
+		/*
 		** write buff to server socket
 		*/
 
