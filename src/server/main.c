@@ -1,6 +1,6 @@
 # include <ft_p.h>
 
-int main( void )
+int main(void)
 {
 	int					listenfd, connfd;
 	pid_t				childpid;
