@@ -58,6 +58,7 @@ void			ft_wlisten(int, int);
 void			ft_wclose(int);
 void			ft_wconnect(int, const struct sockaddr *, socklen_t);
 void			ft_set_sockaddr(struct sockaddr *, int, int, in_addr_t);
+void			ft_fill_buffer(char *, char *);
 int				ft_wsocket(int, int, int);
 int				ft_waccept(int, struct sockaddr *, socklen_t *);
 pid_t			ft_wfork(void);
