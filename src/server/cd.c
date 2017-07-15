@@ -8,6 +8,7 @@ void		ft_cd(char *buff, char **argv)
 {
 	char	*resp;
 	char	*path;
+	char	*home;
 	char	pwd[MAXLINE];
 
 	resp = NULL;
@@ -28,11 +29,12 @@ void		ft_cd(char *buff, char **argv)
 
 			path = ft_path(argv[1]);
 			ft_pwd(pwd);
+			home = ft_get_environ("PWD");
 
 			/*
 			** check for Exiting Servers Home directory
 			*/
-			if (!(ft_strequ(pwd,ft_get_environ("PWD")) == 1 && ft_strequ(path,"./..") == 1))
+			if (!(ft_strequ(pwd,home) == 1 && ft_strequ(path,"./..") == 1))
 			{
 				/*
 				** attempt to chang the directory
@@ -63,6 +65,8 @@ void		ft_cd(char *buff, char **argv)
 			*/
 
 			ft_strdel(&path);
+			ft_strdel(&resp);
+			ft_strdel(&home);
 		}
 	}
 	else

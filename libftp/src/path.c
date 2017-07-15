@@ -2,6 +2,9 @@
 
 char	*ft_path(char *name)
 {
+	char	*home;
+	char	*joined;
+
 	if (name)
 	{
 		if (ft_strlen(name) == 1)
@@ -27,11 +30,17 @@ char	*ft_path(char *name)
 			}
 			else if (ft_strnequ(name, "~/", 1) == 1)
 			{
-				return (ft_strjoin(ft_get_environ("PWD"),name + 1));
+				home = ft_get_environ("PWD");
+				joined = ft_strjoin(home,name + 1);
+				ft_strdel(&home);
+				return (joined);
 			}
 			else if (ft_strnequ(name, "/", 0) == 1)
 			{
-				return (ft_strjoin(ft_get_environ("PWD"),name));
+				home = ft_get_environ("PWD");
+				joined = ft_strjoin(home,name);
+				ft_strdel(&home);
+				return (joined);
 			}
 		}
 	}
