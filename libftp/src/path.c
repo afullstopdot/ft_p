@@ -14,6 +14,10 @@ char	*ft_path(char *name)
 			{
 				return (ft_get_environ("OLDPWD"));
 			}
+			else if (ft_strequ(name, "/"))
+			{
+				return (ft_get_environ("PWD"));
+			}
 		}
 		else
 		{
@@ -24,6 +28,10 @@ char	*ft_path(char *name)
 			else if (ft_strnequ(name, "~/", 1) == 1)
 			{
 				return (ft_strjoin(ft_get_environ("PWD"),name + 1));
+			}
+			else if (ft_strnequ(name, "/", 0) == 1)
+			{
+				return (ft_strjoin(ft_get_environ("PWD"),name));
 			}
 		}
 	}
