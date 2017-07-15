@@ -1,57 +1,44 @@
 #include <ft_p.h>
 
 /*
-** append src to dst after newline is appended to src
+** strjoin wrapper that expects pointer that points
+** to dst must be freed
 */
 
-static char	*append(char *dst, char *src)
+static char		*ft_wstrjoin(char *dst, char *src)
 {
-	char	*final;
-	char	*append;
+	char 			*final;
 
 	final = NULL;
-	append = NULL;
 	if (dst && src)
 	{
-
-		/*
-		** append newline to src
-		*/
-		
-		if ((append = ft_strjoin(src, "\n" )))
-		{
-
-			/*
-			** append newlined src to dst
-			*/
-
-			if ((final = ft_strjoin(dst, append)))
-			{
-
-				/*
-				** argument dst is a malloced str that append must free
-				*/
-				
-				ft_strdel(&dst);
-			
-			}
-
-			ft_strdel(&append);
-		}
+		final = ft_strjoin(dst, src);
+		ft_strdel(&dst);
 	}
 	return (final);
 }
 
 /*
-** this function has a fuck load of memory leaks
+** read contens of a directory into a newline delimetered string
 */
 
-static char	*read_dir(char *dir)
+char		*read_dir(char *dir)
 {
 	DIR				*p_dir;
 	struct dirent	*drnt;
 	char			*dir_contents;
+	char 			name[257];
 
+	/*
+	** clear str
+	*/
+
+	ft_bzero(name, 257);
+
+	/*
+	** start with empty string to append to
+	*/
+	
 	if ((dir_contents = ft_strdup("")))
 	{
 
@@ -68,12 +55,30 @@ static char	*read_dir(char *dir)
 
 			while ((drnt = readdir(p_dir)) != NULL)
 			{
+
+				/*
+				** copy dirname (can never be more than 256 characters)
+				*/
+
+				ft_strcpy(name, drnt->d_name);
+
+				/*
+				** add newline to last character for displaying
+				*/
+
+				name[ft_strlen(drnt->d_name)] = '\n';
 				
 				/*
 				** append the contents to the char * alone with a newline
 				*/
 				
-				dir_contents = append(dir_contents, drnt->d_name);
+				dir_contents = ft_wstrjoin(dir_contents, name);
+
+				/*
+				** clear string for next file/dir
+				*/
+
+				ft_bzero(name, ft_strlen(drnt->d_name) + 1);
 			
 			}
 
@@ -93,8 +98,8 @@ static char	*read_dir(char *dir)
 
 void		ft_ls(char *buff)
 {
-	char	*dir_contents;
-	char	*resp;
+	char			*dir_contents;
+	char			*resp;
 
 	dir_contents = NULL;
 	if (buff)
@@ -116,25 +121,24 @@ void		ft_ls(char *buff)
 			{
 
 				/*
-				** fill buff with direcotory contents, 
-				** using resp if newline was found
+				** set buffer (which frees resp)
 				*/
 
 				ft_fill_buffer(buff, resp);
+				ft_strdel(&dir_contents);
+
 			}
 			else
 			{
-				
+
 				/*
-				** fill buff with direcotory contents, 
-				** using dir_con if newline was not found
+				** set buffer (which frees dir_contents)
 				*/
 				
 				ft_fill_buffer(buff, dir_contents);
-			
+				ft_strdel(&resp);
 			}
-			ft_strdel(&dir_contents);
-			ft_strdel(&resp);
+
 		}
 		else
 			ft_err_quit("ft_ls fail");
