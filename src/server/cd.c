@@ -65,7 +65,7 @@ void		ft_cd(char *buff, char **argv)
 			*/
 
 			ft_strdel(&path);
-			ft_strdel(&resp);
+			// ft_strdel(&resp);
 			ft_strdel(&home);
 		}
 	}
