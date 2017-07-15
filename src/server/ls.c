@@ -1,14 +1,58 @@
 #include <ft_p.h>
 
-// this function has a fuck load of memory leaks
+/*
+** append src to dst after newline is appended to src
+*/
 
-char		*read_dir(char *dir)
+static char	*append(char *dst, char *src)
+{
+	char	*final;
+	char	*append;
+
+	final = NULL;
+	append = NULL;
+	if (dst && src)
+	{
+
+		/*
+		** append newline to src
+		*/
+		
+		if ((append = ft_strjoin(src, "\n" )))
+		{
+
+			/*
+			** append newlined src to dst
+			*/
+
+			if ((final = ft_strjoin(dst, append)))
+			{
+
+				/*
+				** argument dst is a malloced str that append must free
+				*/
+				
+				ft_strdel(&dst);
+			
+			}
+
+			ft_strdel(&append);
+		}
+	}
+	return (final);
+}
+
+/*
+** this function has a fuck load of memory leaks
+*/
+
+static char	*read_dir(char *dir)
 {
 	DIR				*p_dir;
 	struct dirent	*drnt;
 	char			*dir_contents;
 
-	if ((dir_contents = ft_strnew(1)))
+	if ((dir_contents = ft_strdup("")))
 	{
 
 		/*
@@ -29,7 +73,7 @@ char		*read_dir(char *dir)
 				** append the contents to the char * alone with a newline
 				*/
 				
-				dir_contents = ft_strjoin( dir_contents, ft_strjoin( drnt->d_name, "\n" ) );
+				dir_contents = append(dir_contents, drnt->d_name);
 			
 			}
 
@@ -72,14 +116,25 @@ void		ft_ls(char *buff)
 			{
 
 				/*
-				** fill buff with direcotory contents
+				** fill buff with direcotory contents, 
+				** using resp if newline was found
 				*/
 
 				ft_fill_buffer(buff, resp);
-				ft_strdel(&dir_contents);
 			}
 			else
+			{
+				
+				/*
+				** fill buff with direcotory contents, 
+				** using dir_con if newline was not found
+				*/
+				
 				ft_fill_buffer(buff, dir_contents);
+			
+			}
+			ft_strdel(&dir_contents);
+			ft_strdel(&resp);
 		}
 		else
 			ft_err_quit("ft_ls fail");

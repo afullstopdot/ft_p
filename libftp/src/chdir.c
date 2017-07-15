@@ -13,6 +13,7 @@ int		ft_wchdir(char *path)
 		{
 			ft_set_environ("OLDPWD", cwd);
 		}
+		ft_strdel(&cwd);
 	}
 	return (n);
 }

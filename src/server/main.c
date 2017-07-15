@@ -8,9 +8,7 @@ int main(void)
 	socklen_t			clilen;
 	struct sockaddr_in	cliaddr, servaddr;
 	char				buff[MAXLINE];
-	char				*root;
 
-	root = ft_wgetcwd();
 	/*
 	** create a socket
 	*/
@@ -37,6 +35,7 @@ int main(void)
 	*/
 
 	ft_wlisten(listenfd, BACKLOG);
+
 	while (42) 
 	{
 		clilen = sizeof(cliaddr);
@@ -56,7 +55,13 @@ int main(void)
 		{
 
 			/*
-			** 
+			** initialize environment with variables we want
+			*/
+
+			ft_init_environ();
+
+			/*
+			** close to prevent zombies
 			*/
 
 			ft_wclose(listenfd);
@@ -65,15 +70,18 @@ int main(void)
 			** read from client as long as client is writing
 			*/
 
-			while (ft_wreadn(connfd, buff, MAXLINE)) {
+			while (ft_wreadn(connfd, buff, MAXLINE))
+			{
 
 				/*
 				** use buff to handle client request
 				*/
 
-				ft_handle_request(buff, connfd, root);
+				ft_handle_request(buff, connfd);
 			
 			}
+
+			ft_free_environ();
 
 			/*
 			** kill the process

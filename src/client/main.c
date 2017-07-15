@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 	while ((cmd = ft_wreadline()))
 	{
 
-		if (ft_strlen(cmd) > 0)
+		if (ft_strlen(cmd) > 0 && !ft_empty(cmd))
 		{
 
 			/*
@@ -86,7 +86,11 @@ int main(int argc, char **argv)
 				ft_putstr(buff);
 				ft_putstr("\n");
 			}
-		
+
+		}
+		else
+		{
+			ft_strdel(&cmd);
 		}
 		ft_display_prompt();
 	}

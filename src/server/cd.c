@@ -4,7 +4,7 @@
 ** Change the server directory
 */
 
-void		ft_cd(char *buff, char *root_dir, char **argv)
+void		ft_cd(char *buff, char **argv)
 {
 	char	*resp;
 	char	*path;
@@ -12,7 +12,7 @@ void		ft_cd(char *buff, char *root_dir, char **argv)
 
 	resp = NULL;
 	path = NULL;
-	if (buff && root_dir && argv)
+	if (buff && argv)
 	{
 
 		/*
@@ -58,6 +58,11 @@ void		ft_cd(char *buff, char *root_dir, char **argv)
 				resp = ft_strdup("ft_p: Cannot go any lower than server's Home directory");
 				ft_fill_buffer(buff, resp);
 			}
+			/*
+			** free path 
+			*/
+
+			ft_strdel(&path);
 		}
 	}
 	else
