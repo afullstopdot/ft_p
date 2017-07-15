@@ -12,7 +12,7 @@ void		ft_send_response(char *buff, int connfd)
 	}
 }
 
-void		ft_handle_request(char *line, int connfd, char *root)
+void		ft_handle_request(char *line, int connfd)
 {
 	char	**argv;
 	char	buff[MAXLINE];
@@ -22,6 +22,11 @@ void		ft_handle_request(char *line, int connfd, char *root)
 	*/
 
 	argv = ft_get_argv(line);
+
+	/*
+	** clear buff
+	*/
+
 	ft_bzero(buff, MAXLINE);
 
 	/*
@@ -31,7 +36,7 @@ void		ft_handle_request(char *line, int connfd, char *root)
 	if (ft_strequ(argv[0], "pwd"))
 		ft_pwd(buff);
 	else if (ft_strequ(argv[0], "cd"))
-		ft_cd(buff, root, argv);
+		ft_cd(buff, argv);
 	else if (ft_strequ(argv[0], "ls"))
 		ft_ls(buff);
 	else
@@ -42,4 +47,10 @@ void		ft_handle_request(char *line, int connfd, char *root)
 	*/
 
 	ft_send_response(buff, connfd);
+
+	/*
+	** free
+	*/
+
+	ft_dstrdel(argv);
 }

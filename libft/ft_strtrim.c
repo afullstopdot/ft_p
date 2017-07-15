@@ -75,6 +75,7 @@ char				*ft_strtrim(char const *s)
 		{
 			len = start_end[1] - start_end[0] + 1;
 			copy = ft_strsub(s, start_end[0], len);
+			free(start_end);
 		}
 	}
 	return (copy);

@@ -4,14 +4,14 @@
 ** Change the server directory
 */
 
-void		ft_cd(char *buff, char *root_dir, char **argv)
+void		ft_cd(char *buff, char **argv)
 {
 	char	*resp;
 	char	*path;
 
 	resp = NULL;
 	path = NULL;
-	if (buff && root_dir && argv)
+	if (buff && argv)
 	{
 
 		/*
@@ -45,6 +45,12 @@ void		ft_cd(char *buff, char *root_dir, char **argv)
 			*/
 
 			ft_fill_buffer(buff, resp);
+
+			/*
+			** free path 
+			*/
+
+			ft_strdel(&path);
 		}
 	}
 	else

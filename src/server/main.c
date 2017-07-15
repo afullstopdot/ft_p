@@ -8,9 +8,7 @@ int main(void)
 	socklen_t			clilen;
 	struct sockaddr_in	cliaddr, servaddr;
 	char				buff[MAXLINE];
-	char				*root;
 
-	root = ft_wgetcwd();
 	/*
 	** create a socket
 	*/
@@ -71,7 +69,7 @@ int main(void)
 				** use buff to handle client request
 				*/
 
-				ft_handle_request(buff, connfd, root);
+				ft_handle_request(buff, connfd);
 			
 			}
 
