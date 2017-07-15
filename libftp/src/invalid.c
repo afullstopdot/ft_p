@@ -5,7 +5,7 @@ void		ft_invalid(char *buff)
 	char	*defaults;
 
 	defaults = NULL;
-	if (buff && (defaults = ft_strdup("ft_p: argument not supported")))
+	if (buff && (defaults = ft_strdup("ft_p: command not supported")))
 	{
 		ft_strcpy(buff, defaults);
 		ft_strdel(&defaults);

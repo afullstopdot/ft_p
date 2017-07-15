@@ -8,6 +8,7 @@ void		ft_cd(char *buff, char **argv)
 {
 	char	*resp;
 	char	*path;
+	char	pwd[MAXLINE];
 
 	resp = NULL;
 	path = NULL;
@@ -26,26 +27,37 @@ void		ft_cd(char *buff, char **argv)
 			*/
 
 			path = ft_path(argv[1]);
+			ft_pwd(pwd);
 
 			/*
-			** attempt to chang the directory
+			** check for Exiting Servers Home directory
 			*/
-
-			if (!ft_wchdir(path))
+			if (!(ft_strequ(pwd,root_dir) == 1 && ft_strequ(path,"./..") == 1))
 			{
-				resp = ft_strdup("COMPLETE");
+				/*
+				** attempt to chang the directory
+				*/
+
+				if (!ft_wchdir(path))
+				{
+					resp = ft_strdup("COMPLETE");
+				}
+				else
+				{
+					resp = ft_strdup("INCOMPLETE");
+				}
+
+				/*
+				** set the buffer to be used for client response
+				*/
+
+				ft_fill_buffer(buff, resp);
 			}
 			else
 			{
-				resp = ft_strdup("INCOMPLETE");
+				resp = ft_strdup("ft_p: Cannot go any lower than server's Home directory");
+				ft_fill_buffer(buff, resp);
 			}
-
-			/*
-			** set the buffer to be used for client response
-			*/
-
-			ft_fill_buffer(buff, resp);
-
 			/*
 			** free path 
 			*/
