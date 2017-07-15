@@ -32,7 +32,7 @@ void		ft_cd(char *buff, char **argv)
 			/*
 			** check for Exiting Servers Home directory
 			*/
-			if (!(ft_strequ(pwd,root_dir) == 1 && ft_strequ(path,"./..") == 1))
+			if (!(ft_strequ(pwd,ft_get_environ("PWD")) == 1 && ft_strequ(path,"./..") == 1))
 			{
 				/*
 				** attempt to chang the directory
