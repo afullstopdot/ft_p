@@ -137,6 +137,7 @@ void			ft_set_environ(char *target, char *value)
 		if ((res = search_environ(environ[count], target)))
 		{
 			tmp = ft_strjoin("=", value);
+			ft_strdel(&environ[count]);
 			environ[count] = ft_strjoin(target, tmp);
 			ft_strdel(&res);
 			ft_strdel(&tmp);
