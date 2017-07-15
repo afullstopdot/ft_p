@@ -8,7 +8,7 @@ void	ft_check_exit(char *line)
 	if (line)
 	{
 		argv = ft_get_argv(line);
-		if (ft_strequ(argv[0], "exit"))
+		if (ft_strequ(argv[0], "quit"))
 		{
 			exit(EXIT_SUCCESS);
 		}

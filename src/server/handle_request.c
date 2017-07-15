@@ -1,24 +1,5 @@
 # include <ft_p.h>
 
-char		**ft_get_argv(char *line)
-{
-	char	**argv;
-
-	argv = NULL;
-	if (line)
-	{
-		if ((argv = ft_strsplit(line, ' ')))
-		{
-			if (ft_dstrlen(argv) > 0)
-			{
-				return (argv);
-			}
-		}
-	}
-	ft_err_quit("ft_get_argv fail");
-	return (argv);
-}
-
 void		ft_send_response(char *buff, int connfd)
 {
 	if (buff)
@@ -42,10 +23,23 @@ void		ft_handle_request(char *line, int connfd, char *root)
 
 	argv = ft_get_argv(line);
 	ft_bzero(buff, MAXLINE);
-	ft_bzero(root, ft_strlen(root)); //to avoid unused var variable, to be used for cd
+
+	/*
+	** check if a built in function
+	*/
+
 	if (ft_strequ(argv[0], "pwd"))
 		ft_pwd(buff);
+	else if (ft_strequ(argv[0], "cd"))
+		ft_cd(buff, root, argv);
+	else if (ft_strequ(argv[0], "ls"))
+		ft_ls(buff);
 	else
 		ft_invalid(buff);
+
+	/*
+	** using buff send response to client
+	*/
+
 	ft_send_response(buff, connfd);
 }

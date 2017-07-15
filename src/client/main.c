@@ -50,38 +50,43 @@ int main(int argc, char **argv)
 	while ((cmd = ft_wreadline()))
 	{
 
-		/*
-		** set buff with cmd contents, free cmd for next read
-		*/
-
-		ft_fill_buffer(buff, cmd);
-
-		/*
-		** check exit
-		*/
-
-		ft_check_exit(buff);
-
-		/*
-		** write buff to server socket
-		*/
-
-		ft_wwriten(sockfd, buff, MAXLINE);
-
-		/*
-		** clean buff
-		*/
-
-		ft_bzero(buff, MAXLINE);
-
-		/*
-		** read server response into buff
-		*/
-
-		if (ft_wreadn(sockfd, buff, MAXLINE))
+		if (ft_strlen(cmd) > 0)
 		{
-			ft_putstr(buff);
-			ft_putstr("\n");
+
+			/*
+			** set buff with cmd contents, free cmd for next read
+			*/
+
+			ft_fill_buffer(buff, cmd);
+
+			/*
+			** check exit
+			*/
+
+			ft_check_exit(buff);
+
+			/*
+			** write buff to server socket
+			*/
+
+			ft_wwriten(sockfd, buff, MAXLINE);
+
+			/*
+			** clean buff
+			*/
+
+			ft_bzero(buff, MAXLINE);
+
+			/*
+			** read server response into buff
+			*/
+
+			if (ft_wreadn(sockfd, buff, MAXLINE))
+			{
+				ft_putstr(buff);
+				ft_putstr("\n");
+			}
+		
 		}
 		ft_display_prompt();
 	}

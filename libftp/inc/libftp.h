@@ -37,8 +37,7 @@
 # define SA 		struct sockaddr	/* generic socket address 			*/
 # define SERV_PORT 	8000			/* default server port 				*/
 # define BACKLOG 	15				/* default client BACKLOG 			*/
-# define MAXLINE	1024			/* max text line length 			*/
-# define BUFFSIZE	8192			/* buffer size for reads and writes */
+# define MAXLINE	4096			/* max text line length 			*/
 
 /*
 ** Read / Write to a socket
@@ -61,6 +60,7 @@ void			ft_wconnect(int, const struct sockaddr *, socklen_t);
 void			ft_set_sockaddr(struct sockaddr *, int, int, in_addr_t);
 void			ft_fill_buffer(char *, char *);
 void			ft_check_exit(char *);
+int				ft_wchdir(char *);
 int				ft_wsocket(int, int, int);
 int				ft_waccept(int, struct sockaddr *, socklen_t *);
 int				ft_dstrlen(char **);
@@ -68,6 +68,8 @@ pid_t			ft_wfork(void);
 char			*ft_wgetcwd(void);
 char			*ft_wreadline(void);
 char			*ft_get_environ(char *);
+void			ft_set_environ(char *, char *);
+char			*ft_path(char *);
 char			**ft_get_argv(char *);
 
 /*

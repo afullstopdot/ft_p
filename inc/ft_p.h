@@ -18,6 +18,7 @@
 
 void	ft_pwd(char*);
 void	ft_cd(char *, char *, char **);
+void	ft_ls(char *);
 void	ft_invalid(char *);
 void	ft_handle_request(char *, int, char *);
 
