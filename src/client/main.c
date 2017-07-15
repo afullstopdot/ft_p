@@ -16,8 +16,8 @@ int main(int argc, char **argv)
 	** User must specify server IP address as second argument
 	*/
 
-	if (argc != 2)
-		ft_err_quit("usage: client <IPaddress>");
+	if (argc != 3)
+		ft_err_quit("usage: client <IPaddress> <port>");
 
 	/*
 	** open socket for tcp
@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 	** set server address
 	*/
 
-	ft_set_sockaddr((SA *) &servaddr, AF_INET, SERV_PORT, inet_addr(argv[1]));
+	ft_set_sockaddr((SA *) &servaddr, AF_INET, ft_atoi(argv[2]), inet_addr(argv[1]));
 
 	/*
 	**  establish a connection with a TCP server

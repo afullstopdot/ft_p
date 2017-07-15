@@ -17,7 +17,7 @@
 ** Print message and return 
 */
 
-void	err_ret(char *fmt)
+void	ft_err_ret(char *fmt)
 {
 	printf("ft_p: non-fatal error related to system call occured - %s\n", fmt);
 	return;
@@ -28,7 +28,7 @@ void	err_ret(char *fmt)
 ** Print message and return 
 */
 
-void	err_msg(char *fmt)
+void	ft_err_msg(char *fmt)
 {
 	printf("ft_p: non-fatal error unrelated to system call occured - %s\n", fmt);
 	return;

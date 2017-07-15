@@ -1,6 +1,6 @@
 # include <ft_p.h>
 
-int main(void)
+int main(int argc, char **argv)
 {
 	int					listenfd;
 	int 				connfd;
@@ -9,6 +9,8 @@ int main(void)
 	struct sockaddr_in	cliaddr, servaddr;
 	char				buff[MAXLINE];
 
+	if (argc != 2)
+		ft_err_msg("ft_p: usage server <PORT>");
 	/*
 	** create a socket
 	*/
@@ -21,7 +23,7 @@ int main(void)
 	** on any interface for port `SERV_PORTS`
 	*/
 
-	ft_set_sockaddr((SA *) &servaddr, AF_INET, SERV_PORT, htonl(INADDR_ANY));
+	ft_set_sockaddr((SA *) &servaddr, AF_INET, ft_atoi(argv[1]), htonl(INADDR_ANY));
 
 	/*
 	** assign a local protocol address to a socket
