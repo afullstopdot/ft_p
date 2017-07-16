@@ -83,8 +83,9 @@ int main(int argc, char **argv)
 			
 			}
 
+#ifndef __APPLE__
 			ft_free_environ();
-
+#endif
 			/*
 			** kill the process
 			*/

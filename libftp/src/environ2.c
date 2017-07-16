@@ -36,9 +36,9 @@ void			ft_free_environ(void)
 	count = 0;
 	while (environ[count])
 	{
-		ft_strdel(&environ[count++]);
+		ft_strdel(&environ[count++]); //double free here
 	}
-	free(environ);
+	free(environ); //double free on mac
 }
 
 /*
