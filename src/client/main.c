@@ -60,31 +60,34 @@ int main(int argc, char **argv)
 			ft_fill_buffer(buff, cmd);
 
 			/*
-			** check exit
+			** handle local command
 			*/
 
-			ft_check_exit(buff);
-
-			/*
-			** write buff to server socket
-			*/
-
-			ft_wwriten(sockfd, buff, MAXLINE);
-
-			/*
-			** clean buff
-			*/
-
-			ft_bzero(buff, MAXLINE);
-
-			/*
-			** read server response into buff
-			*/
-
-			if (ft_wreadn(sockfd, buff, MAXLINE))
+			if (!ft_lhandle_request(buff, STDOUT_FILENO))
 			{
-				ft_putstr(buff);
-				ft_putstr("\n");
+
+				/*
+				** write buff to server socket
+				*/
+
+				ft_wwriten(sockfd, buff, MAXLINE);
+
+				/*
+				** clean buff
+				*/
+
+				ft_bzero(buff, MAXLINE);
+
+				/*
+				** read server response into buff
+				*/
+
+				if (ft_wreadn(sockfd, buff, MAXLINE))
+				{
+					ft_putstr(buff);
+					ft_putstr("\n");
+				}
+			
 			}
 
 		}
