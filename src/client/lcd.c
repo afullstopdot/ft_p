@@ -25,8 +25,8 @@ void		ft_lcd(char *buff, char **argv)
 			** check path for ~ or -
 			*/
 
-			path = ft_path(argv[1]);
-
+			path = ft_lpath(argv[1]);
+			printf("%s\n", path);
 			/*
 			** attempt to chang the directory
 			*/

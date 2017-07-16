@@ -11,7 +11,7 @@ static char		**create_environ(void)
 
 	envp = NULL;
 	value = NULL;
-	if ((envp = ft_memalloc(sizeof(char *) + 3)))
+	if ((envp = ft_memalloc(sizeof(char *) + 4)))
 	{
 		if ((value = ft_get_environ("PWD")))
 		{
@@ -23,7 +23,12 @@ static char		**create_environ(void)
 			envp[1] = ft_strjoin("OLDPWD=", value);
 			ft_strdel(&value);
 		}
-		envp[2] = NULL;
+		if ((value = ft_get_environ("HOME")))
+		{
+			envp[2] = ft_strjoin("HOME=", value);
+			ft_strdel(&value);
+		}
+		envp[3] = NULL;
 	}
 	return (envp);
 }

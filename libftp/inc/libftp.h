@@ -76,6 +76,7 @@ char			*ft_wreadline(void);
 char			*ft_get_environ(char *);
 void			ft_set_environ(char *, char *);
 char			*ft_path(char *);
+char			*ft_lpath(char *name);
 char			**ft_get_argv(char *);
 
 /*
