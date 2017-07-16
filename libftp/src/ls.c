@@ -1,4 +1,4 @@
-#include <ft_p.h>
+#include <libftp.h>
 
 /*
 ** strjoin wrapper that expects pointer that points

@@ -63,6 +63,8 @@ void			ft_check_exit(char *);
 void			ft_dstrdel(char **);
 void			ft_init_environ(void);
 void			ft_free_environ(void);
+void			ft_ls(char *);
+void			ft_pwd(char*);
 int				ft_wchdir(char *);
 int				ft_wsocket(int, int, int);
 int				ft_waccept(int, struct sockaddr *, socklen_t *);
@@ -74,6 +76,7 @@ char			*ft_wreadline(void);
 char			*ft_get_environ(char *);
 void			ft_set_environ(char *, char *);
 char			*ft_path(char *);
+char			*ft_lpath(char *name);
 char			**ft_get_argv(char *);
 
 /*

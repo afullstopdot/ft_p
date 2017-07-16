@@ -1,4 +1,4 @@
-# include <ft_p.h>
+# include <libftp.h>
 
 void		ft_pwd(char *buff)
 {

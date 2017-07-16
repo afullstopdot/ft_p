@@ -16,10 +16,10 @@
 
 # include <libftp.h>
 
-void	ft_pwd(char*);
 void	ft_cd(char *, char **);
-void	ft_ls(char *);
+void	ft_lcd(char *, char **);
 void	ft_invalid(char *);
 void	ft_handle_request(char *, int);
+int		ft_lhandle_request(char *, int);
 
 #endif
