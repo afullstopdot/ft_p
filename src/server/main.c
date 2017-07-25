@@ -60,7 +60,7 @@ int main(int argc, char **argv)
 			** initialize environment with variables we want
 			*/
 
-			ft_init_environ();
+//			ft_init_environ();
 
 			/*
 			** close to prevent zombies
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
 			}
 
 #ifndef __APPLE__
-			ft_free_environ();
+//			ft_free_environ();
 #endif
 			/*
 			** kill the process
