@@ -69,7 +69,7 @@ char		*read_dir(char *dir)
 				name[ft_strlen(drnt->d_name)] = '\n';
 				
 				/*
-				** append the contents to the char * alone with a newline
+				** append the contents to the char * along with a newline
 				*/
 				
 				dir_contents = ft_wstrjoin(dir_contents, name);

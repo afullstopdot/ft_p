@@ -38,19 +38,12 @@ ssize_t	ft_readn(int fd, void *vptr, size_t n)
 	return (n - nleft);			/* return >= 0 */
 }
 
-/*
-** ft_readn wrapper function
-** If the system supports the MSG_WAITALL flag we can omit the ft_readn 
-** function which keeps calling to read until n bytes are read and use 
-** recv rather. It tells the kernel not to return from a read operation 
-** until the requested number of bytes have been read. 
-*/
-
 ssize_t			ft_wreadn(int fd, void *ptr, size_t nbytes)
 {
 	ssize_t		n;
 
-	if ((n = ft_readn(fd, ptr, nbytes)) < 0) {
+	if ((n = ft_readn(fd, ptr, nbytes)) < 0)
+	{
 		ft_err_sys("readn error");
 	}
 	return (n);

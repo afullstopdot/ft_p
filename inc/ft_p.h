@@ -10,16 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef FT_P_H
 # define FT_P_H
 
 # include <libftp.h>
 
-void	ft_cd(char *, char **);
-void	ft_lcd(char *, char **);
-void	ft_invalid(char *);
-void	ft_handle_request(char *, int);
-int		ft_lhandle_request(char *, int);
+/*
+** On MacOS environ must not be free'd
+*/
+
+#ifdef __APPLE__
+# define FREE_ENVIRON FALSE
+#else
+# define FREE_ENVIRON TRUE
+#endif
+
+
+void	ft_cd(char *ptr, char **pptr);
+void	ft_lcd(char *ptr, char **pptr);
+void	ft_invalid(char *ptr);
+void	ft_handle_request(char *ptr, int arg);
+int		ft_lhandle_request(char *ptr, int arg);
 
 #endif

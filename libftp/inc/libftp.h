@@ -20,6 +20,7 @@
 # include <sys/stat.h>
 # include <netinet/in.h>
 # include <netinet/ip.h>
+# include <netdb.h>
 # include <arpa/inet.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -78,6 +79,12 @@ void			ft_set_environ(char *, char *);
 char			*ft_path(char *);
 char			*ft_lpath(char *name);
 char			**ft_get_argv(char *);
+
+/*
+** Host names
+*/
+
+char            *ft_resolve_host(char *argv);
 
 /*
 ** Error handling

@@ -10,13 +10,20 @@
 #                                                                              #
 # **************************************************************************** #
 
-## number pattern
+## target name
 
-re='^[0-9]+$'
+target='server'
+
+## ansi colors
+
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+GREEN='\033[0;32m'
+NC='\033[0m'
 
 ## ask for port number
 
-printf "PORT #: ";
+printf "${YELLOW}Enter port number to be close: ${NC}";
 
 ## assign port number
 
@@ -28,14 +35,28 @@ if [ "$port" -eq "$port" ] 2>/dev/null; then
 
 	# get output from lsof ( including PID )
 
-	lsof="$(lsof -i :$port)"
+	printf "${YELLOW}Looking for port :[ ${port} ] PID${NC}\n"
+	pid="$(lsof -i :$port | grep $target | cut -d ' ' -f 3)"
 
-	printf "$lsof";
+	# check if pid is a num
+
+	if [ "$pid" -eq "$pid" ] 2>/dev/null; then
+
+		## kill pid
+
+		printf "${GREEN}PID found, killing process: ${NC}"
+		kill $pid
+
+	else
+
+		printf "${RED}Unable to find PID, bye${NC}\n"
+
+	fi
 
 else
 
 	# not a valid port number
 
-	printf "error: not a valid port number";
+	printf "${RED}Not a valid port number, bye\n${NC}";
 
 fi
