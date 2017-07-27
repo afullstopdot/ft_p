@@ -82,8 +82,8 @@ pid_t			ft_wfork(void);
 ** server/client built in commands
 */
 
-void			ft_ls(char *);
-void			ft_pwd(char*);
+void			ft_ls(int fd);
+void			ft_pwd(int fd);
 
 /*
 ** server/client path handlers
@@ -115,7 +115,7 @@ void			ft_display_prompt(void);
 */
 
 void			ft_fill_buffer(char *, char *);
-void			ft_check_exit(char *); //will die
+void			ft_check_exit(char *);
 void			ft_dstrdel(char **);
 int				ft_dstrlen(char **);
 int				ft_empty(char *);

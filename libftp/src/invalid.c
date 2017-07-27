@@ -1,17 +1,6 @@
 # include <libftp.h>
 
-void		ft_invalid(char *buff)
+void		ft_invalid(int fd)
 {
-	char	*defaults;
-
-	defaults = NULL;
-	if (buff && (defaults = ft_strdup("ft_p: command not supported")))
-	{
-		ft_strcpy(buff, defaults);
-		ft_strdel(&defaults);
-	}
-	else
-	{
-		ft_err_quit("ft_pwd fail");
-	}
+	ft_send_response("ft_p: command not supported", fd);
 }

@@ -1,17 +1,21 @@
 # include <libftp.h>
 
-void		ft_pwd(char *buff)
+/*
+** get cwd and send response to client
+*/
+
+void		ft_pwd(int fd)
 {
 	char	*cwd;
 
 	cwd = NULL;
-	if (buff && (cwd = ft_wgetcwd()))
+	if ((cwd = ft_wgetcwd()))
 	{
-		ft_strcpy(buff, cwd);
+		ft_send_response(cwd, fd);
 		ft_strdel(&cwd);
 	}
 	else
 	{
-		ft_err_quit("ft_pwd fail");
+		ft_send_response("ft_p: an error occured for pwd command", fd);
 	}
 }

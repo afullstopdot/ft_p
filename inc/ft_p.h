@@ -29,15 +29,15 @@
 ** server
 */
 
-void	ft_cd(char *ptr, char **pptr);
-void	ft_invalid(char *ptr);
-void	ft_handle_request(char *ptr, int arg);
+void	ft_cd(int fd, char **pptr);
+void	ft_invalid(int fd);
+void	ft_handle_request(char *line, int fd);
 
 /*
 ** client
 */
 
-void	ft_lcd(char *ptr, char **pptr);
-int		ft_lhandle_request(char *ptr, int arg);
+void	ft_lcd(int fd, char **pptr);
+int		ft_lhandle_request(char *line, int fd);
 
 #endif

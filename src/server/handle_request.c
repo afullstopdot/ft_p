@@ -7,37 +7,24 @@ void		ft_handle_request(char *line, int connfd)
 	/*
 	** get command line by splitting string
 	*/
-
-	argv = ft_get_argv(line);
-
-	/*
-	** clear buff
-	*/
-
-	ft_bzero(buff, MAXLINE);
-
-	/*
-	** check if a built in function
-	*/
-
-	if (ft_strequ(argv[0], "pwd"))
-		ft_pwd();
-	else if (ft_strequ(argv[0], "cd"))
-		ft_cd(argv);
-	else if (ft_strequ(argv[0], "ls"))
-		ft_ls();
+	if ((argv = ft_get_argv(line)))
+	{
+		/*
+		** check if a built in function
+		*/
+		if (ft_strequ(argv[0], "pwd"))
+			ft_pwd(connfd);
+		else if (ft_strequ(argv[0], "cd"))
+			ft_cd(connfd, argv);
+		else if (ft_strequ(argv[0], "ls"))
+			ft_ls(connfd);
+		else
+			ft_send_response("ft_p: invalid command\n", connfd);
+		/*
+		** free
+		*/
+		ft_dstrdel(argv);
+	}
 	else
-		ft_invalid();
-
-	/*
-	** using buff send response to client
-	*/
-
-	ft_send_response(buff, connfd);
-
-	/*
-	** free
-	*/
-
-	ft_dstrdel(argv);
+		ft_send_response("ft_p: command not specified\n", connfd);
 }

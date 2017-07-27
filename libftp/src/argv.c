@@ -7,14 +7,13 @@ char		**ft_get_argv(char *line)
 	argv = NULL;
 	if (line)
 	{
+		if (ft_empty(line))
+			return (NULL);
 		if ((argv = ft_strsplit(line, ' ')))
 		{
 			if (ft_dstrlen(argv) > 0)
-			{
 				return (argv);
-			}
 		}
 	}
-	ft_err_quit("ft_get_argv fail");
 	return (argv);
 }

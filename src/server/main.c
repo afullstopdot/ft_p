@@ -74,11 +74,6 @@ int main(int argc, char **argv)
 				ft_strdel(&buff);
 			}
 			/*
-			** free the environment
-			*/
-			if (FREE_ENVIRON)
-				ft_free_environ();
-			/*
 			** kill the process
 			*/
 			exit(0);
