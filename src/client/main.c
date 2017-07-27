@@ -60,6 +60,9 @@ int main(int argc, char **argv)
 	*/
 	while ((cmd = ft_wreadline(0)))
 	{
+		/*
+		** check that command is not empty
+		*/
 		if (ft_strlen(cmd) > 0 && !ft_empty(cmd))
 		{
 			/*
