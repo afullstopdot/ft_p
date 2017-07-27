@@ -39,7 +39,7 @@ int	connect_to_server(char **argv)
 int main(int argc, char **argv)
 {
 	char				*cmd;
-	char 				buff[MAXLINE];
+	char 				*buff;
 	int					sockfd;
 
 	/*
@@ -63,31 +63,25 @@ int main(int argc, char **argv)
 		if (ft_strlen(cmd) > 0 && !ft_empty(cmd))
 		{
 			/*
-			** set buff with cmd contents, free cmd for next read
-			*/
-			ft_fill_buffer(buff, cmd);
-			/*
 			** handle local command
 			*/
-			if (!ft_lhandle_request(buff, STDOUT_FILENO))
+			if (!ft_lhandle_request(cmd, STDOUT_FILENO))
 			{
 				/*
-				** write buff to server socket
+				** send command to server
 				*/
-				ft_wwriten(sockfd, buff, MAXLINE);
-				/*
-				** clean buff
-				*/
-				ft_bzero(buff, MAXLINE);
+				ft_send_response(cmd, sockfd);
 				/*
 				** read server response into buff
 				*/
-				if (ft_wreadn(sockfd, buff, MAXLINE))
+				if ((buff = ft_wreadline(sockfd)))
 				{
-					ft_putstr(buff);
-					ft_putstr("\n");
+					ft_send_response(buff, STDOUT_FILENO);
+					ft_strdel(&buff);
 				}
+
 			}
+			ft_strdel(&cmd);
 		}
 		else
 		{

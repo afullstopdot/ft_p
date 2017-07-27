@@ -65,6 +65,7 @@ int main(int argc, char **argv)
 				if (ft_strequ(buff, "quit"))
 				{
 					ft_strdel(&buff);
+					ft_send_response("\033[0;31mbye.\033[0m", connfd);
 					break;
 				}
 				/*

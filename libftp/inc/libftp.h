@@ -28,7 +28,6 @@
 # include <unistd.h>
 # include <errno.h>
 # include <fcntl.h>
-# include <stdarg.h>
 # include <dirent.h>
 
 /*
@@ -39,6 +38,11 @@
 # define SERV_PORT 	8000			/* default server port 				*/
 # define BACKLOG 	15				/* default client BACKLOG 			*/
 # define MAXLINE	4096			/* max text line length 			*/
+# define RED        "\033[0;31m"
+# define YELLOW     "\033[0;33m"
+# define GREEN      "\033[0;32m"
+# define BLUE       "\033[0;34m"
+# define NC         "\033[0m"
 
 /*
 ** Read / Write to a fd
@@ -111,6 +115,12 @@ void		    ft_send_response(char *buff, int connfd);
 void			ft_display_prompt(void);
 
 /*
+** file I/O
+*/
+
+char		    *ft_type(char *path);
+
+/*
 ** helper functions
 */
 
@@ -119,6 +129,7 @@ void			ft_check_exit(char *);
 void			ft_dstrdel(char **);
 int				ft_dstrlen(char **);
 int				ft_empty(char *);
+char			*ft_add_color(char *str, char *color);
 
 /*
 ** server/client built in command wrapper functions

@@ -27,6 +27,7 @@ char		*read_dir(char *dir)
 	DIR				*p_dir;
 	struct dirent	*drnt;
 	char			*dir_contents;
+	char			*final;
 	char 			name[257];
 
 	/*
@@ -48,14 +49,15 @@ char		*read_dir(char *dir)
 			*/
 			while ((drnt = readdir(p_dir)) != NULL)
 			{
+				final = ft_type(drnt->d_name);
 				/*
 				** copy dirname (can never be more than 256 characters)
 				*/
-				ft_strcpy(name, drnt->d_name);
+				ft_strcpy(name, final);
 				/*
 				** add newline to last character for displaying
 				*/
-				name[ft_strlen(drnt->d_name)] = '\n';
+				name[ft_strlen(final)] = '\n';
 				/*
 				** append the contents to the char * along with a newline
 				*/
@@ -63,7 +65,11 @@ char		*read_dir(char *dir)
 				/*
 				** clear string for next file/dir
 				*/
-				ft_bzero(name, ft_strlen(drnt->d_name) + 1);
+				ft_bzero(name, ft_strlen(final) + 1);
+				/*
+				** free final so we can use it again
+				*/
+				ft_strdel(&final);
 			}
 			/*
 			** close the open directory
