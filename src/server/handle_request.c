@@ -3,7 +3,6 @@
 void		ft_handle_request(char *line, int connfd)
 {
 	char	**argv;
-	char	buff[MAXLINE];
 
 	/*
 	** get command line by splitting string
@@ -22,13 +21,13 @@ void		ft_handle_request(char *line, int connfd)
 	*/
 
 	if (ft_strequ(argv[0], "pwd"))
-		ft_pwd(buff);
+		ft_pwd();
 	else if (ft_strequ(argv[0], "cd"))
-		ft_cd(buff, argv);
+		ft_cd(argv);
 	else if (ft_strequ(argv[0], "ls"))
-		ft_ls(buff);
+		ft_ls();
 	else
-		ft_invalid(buff);
+		ft_invalid();
 
 	/*
 	** using buff send response to client

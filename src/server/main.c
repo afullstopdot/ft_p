@@ -59,11 +59,17 @@ int main(int argc, char **argv)
 			*/
 			while ((buff = ft_wreadline(connfd)))
 			{
+				/*
+				** break from loop, close connection
+				*/
 				if (ft_strequ(buff, "quit"))
 				{
 					ft_strdel(&buff);
 					break;
 				}
+				/*
+				** handle the command
+				*/
 				ft_handle_request(buff, connfd);
 				ft_strdel(&buff);
 			}

@@ -41,45 +41,91 @@
 # define MAXLINE	4096			/* max text line length 			*/
 
 /*
-** Read / Write to a socket
+** Read / Write to a fd
 */
 
-ssize_t			ft_readn(int, void *, size_t);			/* read n bytes of fd into buffer */
-ssize_t			ft_writen(int, const void *, size_t);	/* write "n" bytes to a fd */
-void			ft_display_prompt(void);
+ssize_t			ft_readn(int, void *, size_t);
+ssize_t			ft_writen(int, const void *, size_t);
+ssize_t			ft_wreadn(int, void *, size_t);
+char			*ft_wreadline(int);
+void			ft_wwriten(int, void *, size_t);
 
 /*
-** wrapper functions
+** socket wrapper functions
 */
 
-ssize_t			ft_wreadn(int, void *, size_t);
-void			ft_wwriten(int, void *, size_t);
+
 void			ft_wbind(int, const struct sockaddr *, socklen_t);
 void			ft_wlisten(int, int);
 void			ft_wclose(int);
 void			ft_wconnect(int, const struct sockaddr *, socklen_t);
 void			ft_set_sockaddr(struct sockaddr *, int, int, in_addr_t);
-void			ft_fill_buffer(char *, char *);
-void			ft_check_exit(char *);
-void			ft_dstrdel(char **);
-void			ft_init_environ(void);
-void			ft_free_environ(void);
-void			ft_ls(char *);
-void			ft_pwd(char*);
-int				ft_wchdir(char *);
 int				ft_wsocket(int, int, int);
 int				ft_waccept(int, struct sockaddr *, socklen_t *);
-int				ft_dstrlen(char **);
-int				ft_empty(char *);
-pid_t			ft_wfork(void);
-char			*ft_wgetcwd(void);
-char			*ft_wreadline(int);
-char			*ft_get_environ(char *);
+
+/*
+** server environment handlers
+*/
+
+void			ft_init_environ(void);
+void			ft_free_environ(void);
 void			ft_set_environ(char *, char *);
+char			*ft_get_environ(char *);
+
+/*
+** server multiple processes
+*/
+
+pid_t			ft_wfork(void);
+
+/*
+** server/client built in commands
+*/
+
+void			ft_ls(char *);
+void			ft_pwd(char*);
+
+/*
+** server/client path handlers
+*/
+
 char			*ft_path(char *);
 char			*ft_lpath(char *name);
+
+/*
+** server/client command interpreter
+*/
+
 char			**ft_get_argv(char *);
+
+/*
+** server/client socket writing
+*/
+
 void		    ft_send_response(char *buff, int connfd);
+
+/*
+** client prompt
+*/
+
+void			ft_display_prompt(void);
+
+/*
+** helper functions
+*/
+
+void			ft_fill_buffer(char *, char *);
+void			ft_check_exit(char *); //will die
+void			ft_dstrdel(char **);
+int				ft_dstrlen(char **);
+int				ft_empty(char *);
+
+/*
+** server/client built in command wrapper functions
+*/
+
+int				ft_wchdir(char *);
+char			*ft_wgetcwd(void);
 
 /*
 ** Host names
