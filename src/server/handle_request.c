@@ -1,17 +1,5 @@
 # include <ft_p.h>
 
-void		ft_send_response(char *buff, int connfd)
-{
-	if (buff)
-	{
-		ft_wwriten(connfd, buff, MAXLINE);
-	}
-	else
-	{
-		ft_err_quit("ft_send_response fail");
-	}
-}
-
 void		ft_handle_request(char *line, int connfd)
 {
 	char	**argv;

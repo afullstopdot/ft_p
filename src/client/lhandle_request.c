@@ -1,6 +1,6 @@
 # include <ft_p.h>
 
-void		ft_send_response(char *buff, int connfd, int print)
+void		ft_send_lresponse(char *buff, int connfd, int print)
 {
 	if (buff)
 	{
@@ -74,7 +74,7 @@ int			ft_lhandle_request(char *line, int connfd)
 	** using buff send response to client
 	*/
 
-	ft_send_response(buff, connfd, n);
+	ft_send_lresponse(buff, connfd, n);
 
 	/*
 	** free

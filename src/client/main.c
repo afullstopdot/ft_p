@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 	/*
 	** read from stdin
 	*/
-	while ((cmd = ft_wreadline()))
+	while ((cmd = ft_wreadline(0)))
 	{
 		if (ft_strlen(cmd) > 0 && !ft_empty(cmd))
 		{

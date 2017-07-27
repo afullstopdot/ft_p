@@ -17,7 +17,7 @@ LINKER = gcc
 
 # Flags
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g3
 
 # Project Directory
 

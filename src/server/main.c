@@ -7,7 +7,7 @@ int main(int argc, char **argv)
 	pid_t				childpid;
 	socklen_t			clilen;
 	struct sockaddr_in	cliaddr, servaddr;
-	char				buff[MAXLINE];
+	char				*buff;
 
 	if (argc != 2)
 		ft_err_msg("ft_p: usage server <PORT>");
@@ -57,15 +57,18 @@ int main(int argc, char **argv)
 			/*
 			** read from client as long as client is writing
 			*/
-			while (ft_wreadn(connfd, buff, MAXLINE))
+			while ((buff = ft_wreadline(connfd)))
 			{
-				/*
-				** use buff to handle client request
-				*/
+				if (ft_strequ(buff, "quit"))
+				{
+					ft_strdel(&buff);
+					break;
+				}
 				ft_handle_request(buff, connfd);
+				ft_strdel(&buff);
 			}
 			/*
-			** free the environment, wont work on mac
+			** free the environment
 			*/
 			if (FREE_ENVIRON)
 				ft_free_environ();

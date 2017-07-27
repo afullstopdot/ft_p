@@ -12,11 +12,11 @@
 
 #include <libftp.h>
 
-char	get_char(void)
+char	get_char(int fd)
 {
 	char	c;
 
-	read(0, &c, 1);
+	read(fd, &c, 1);
 	return (c);
 }
 
@@ -33,7 +33,7 @@ void	resize_str(char **str, size_t new_size)
 	}
 }
 
-char	*ft_readline(void)
+char	*ft_readline(int fd)
 {
 	char	*line;
 	char	c;
@@ -41,13 +41,13 @@ char	*ft_readline(void)
 	int		size;
 
 	loop = 0;
-	size = 10;
+	size = 50;
 	line = ft_strnew(size);
 	if (line == NULL)
 		return (NULL);
 	while (1)
 	{
-		c = get_char();
+		c = get_char(fd);
 		if (c == '\n' || c == '\0')
 		{
 			line[loop] = '\0';
@@ -66,11 +66,11 @@ char	*ft_readline(void)
 ** wrapper for ft_readline
 */
 
-char			*ft_wreadline(void)
+char			*ft_wreadline(int fd)
 {
 	char		*n;
 
-	if (!(n = ft_readline()))
+	if (!(n = ft_readline(fd)))
 		ft_err_sys("readline error");
 	return (n);
 }

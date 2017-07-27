@@ -73,12 +73,13 @@ int				ft_dstrlen(char **);
 int				ft_empty(char *);
 pid_t			ft_wfork(void);
 char			*ft_wgetcwd(void);
-char			*ft_wreadline(void);
+char			*ft_wreadline(int);
 char			*ft_get_environ(char *);
 void			ft_set_environ(char *, char *);
 char			*ft_path(char *);
 char			*ft_lpath(char *name);
 char			**ft_get_argv(char *);
+void		    ft_send_response(char *buff, int connfd);
 
 /*
 ** Host names
