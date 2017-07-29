@@ -10,39 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/macholibft.h"
+#include <libftp.h>
 
 /*
 ** Read a void pointer, from buffer offset upto size bytes
 */
 
-void 	*_get_chunk( t_buffer *buffer, size_t size )
+void 	*ft_get_chunk(t_buffer *buffer, size_t size)
 {
 
 	void	*chunk;
 
 	chunk = NULL;	
-	if ( buffer ) {
-
-		if ( ( buffer->_offset + size ) > buffer->_size ) {
-
-			return ( NULL );
-
-		}
-
-		chunk = ft_memalloc( size );
-		if ( chunk ) {
-
-			chunk = ft_memcpy( chunk, ( void* ) ( ( char* )buffer->_stream + buffer->_offset ), size );
-			if ( !chunk ) {
-
-				return ( NULL );
-
-			}
+	if (buffer)
+	{
+		if ((buffer->_offset + size) > buffer->_size)
+			return (NULL);
+		if ((chunk = ft_memalloc(size)))
+		{
+			chunk = ft_memcpy(chunk, (void *)((char *)buffer->_stream + buffer->_offset), size);
+			if (!chunk)
+				return (NULL);
 			buffer->_offset += size;
-
 		}
-
 	}
 	return ( chunk );
 
@@ -52,13 +42,8 @@ void 	*_get_chunk( t_buffer *buffer, size_t size )
 ** Delete malloced chunk
 */
 
-void	_free_chunk( void *chunk )
+void	ft_free_chunk(void *chunk)
 {
-
-	if ( chunk ) {
-
-		ft_memdel( &chunk );
-
-	}
-
+	if (chunk)
+		ft_memdel(&chunk);
 }

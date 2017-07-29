@@ -86,3 +86,6 @@ int main(int argc, char **argv)
 	}
 	return (0);
 }
+
+
+// it would appear the compile does not like it when you free a ptr you are assigning to wtf

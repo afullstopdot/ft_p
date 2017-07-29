@@ -18,6 +18,8 @@ void		ft_handle_request(char *line, int connfd)
 			ft_cd(connfd, argv);
 		else if (ft_strequ(argv[0], "ls"))
 			ft_ls(connfd);
+		else if (ft_strequ(argv[0], "put"))
+			ft_server_put(connfd, argv);
 		else
 			ft_send_response("ft_p: \033[0;31minvalid command\n\033[0m", connfd);
 		/*

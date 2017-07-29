@@ -18,6 +18,7 @@
 # include <sys/types.h>
 # include <sys/socket.h>
 # include <sys/stat.h>
+# include <sys/mman.h>
 # include <netinet/in.h>
 # include <netinet/ip.h>
 # include <netdb.h>
@@ -29,6 +30,19 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <dirent.h>
+
+/*
+** file buff
+*/
+
+typedef struct	s_buffer
+{
+	void		*_stream;
+	char		*_filename;
+	size_t		_size;
+	size_t		_offset;
+
+}				t_buffer;
 
 /*
 ** application constants
@@ -119,6 +133,14 @@ void			ft_display_prompt(void);
 */
 
 char		    *ft_type(char *path);
+int             ft_file_exists(char *file);
+int	            ft_is_regular(char *path);
+size_t	        ft_file_size(int fd);
+void 	        *ft_get_chunk(t_buffer *buffer, size_t size);
+t_buffer 		*ft_set_buffer(char *path);
+void			ft_free_buffer(t_buffer *buffer);
+void	        ft_free_chunk(void *chunk);
+
 
 /*
 ** helper functions

@@ -43,7 +43,7 @@ char		*read_dir(char *dir)
 				/*
 				** append the contents to the char * along with a newline
 				*/
-				dir_contents = ft_wstrjoin(dir_contents, name);
+				dir_contents = ft_strjoin(dir_contents, name); //mem leaks here
 				/*
 				** clear string for next file/dir
 				*/

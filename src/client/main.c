@@ -71,23 +71,29 @@ int main(int argc, char **argv)
 			if (!ft_lhandle_request(cmd, STDOUT_FILENO))
 			{
 				/*
-				** append newline so server readline can stop correctly
+				** special commands (require client/server interaction)
 				*/
-				cmd = ft_wstrjoin(cmd, "\n");
-				/*
-				** send command to server
-				*/
-				ft_send_response(cmd, sockfd);
-				/*
-				** read server response into buff
-				*/
-				if ((buff = ft_wreadline(sockfd)))
+				if (!ft_handle_special(cmd, sockfd))
 				{
 					/*
-					** handle the command
+					** append newline so server readline can stop correctly
 					*/
-					ft_putendl(buff);
-					ft_strdel(&buff);
+					cmd = ft_wstrjoin(cmd, "\n");
+					/*
+					** send command to server
+					*/
+					ft_send_response(cmd, sockfd);
+					/*
+					** read server response into buff
+					*/
+					if ((buff = ft_wreadline(sockfd)))
+					{
+						/*
+						** handle the command
+						*/
+						ft_putendl(buff);
+						ft_strdel(&buff);
+					}
 				}
 			}
 			ft_strdel(&cmd);

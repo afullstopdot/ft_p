@@ -5,9 +5,8 @@ int			ft_dstrlen(char **str)
 	int		len;
 
 	len = 0;
-	while (*str)
+	while (str[len])
 	{
-		str++;
 		len++;
 	}
 	return (len);

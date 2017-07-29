@@ -20,7 +20,7 @@ void	ft_display_prompt(void)
 	{
 		ft_putstr("\033[0;35m(");
 		ft_putstr(cwd);
-		ft_putstr(">)$ \033[0m");
+		ft_putstr(")$ \033[0m");
 	}
 	else
 		ft_err_quit("getcwd fail");
