@@ -9,6 +9,7 @@ void		ft_cd(int fd, char **argv)
 	char	*path;
 	char	*home;
 	char	*pwd;
+	char	*final;
 
 	if (argv)
 	{
@@ -29,12 +30,20 @@ void		ft_cd(int fd, char **argv)
 			if (!(ft_strequ(pwd, home) == 1 && ft_strequ(path, "./..") == 1))
 			{
 				/*
-				** attempt to chang the directory
+				** removing spaces/newlines
 				*/
-				if (!ft_wchdir(path))
-					ft_send_response("ft_p: \033[0;32mdirectory changed\n\033[0m", fd);
+				if ((final = ft_strtrim(path)))
+				{
+					/*
+					** attempt to chang the directory
+					*/
+					if (!ft_wchdir(final))
+						ft_send_response("ft_p: \033[0;32mdirectory changed\n\033[0m", fd);
+					else
+						ft_send_response("ft_p: \033[0;31mfailed to change directory\n\033[0m", fd);
+				}
 				else
-					ft_send_response("ft_p: \033[0;31mfailed to change directory\n\033[0m", fd);
+					ft_send_response("ft_p: \033[0;31mcannot go any lower than server's HOME directory\n\033[0m", fd);
 			}
 			else
 				ft_send_response("ft_p: \033[0;31mcannot go any lower than server's HOME directory\n\033[0m", fd);
