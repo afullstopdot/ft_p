@@ -1,6 +1,6 @@
 # include <ft_p.h>
 
-int			ft_lhandle_request(char *line, int connfd)
+int			ft_lhandle_request(char *line, int sockfd)
 {
 	char	**argv;
 	int		n;
@@ -18,11 +18,11 @@ int			ft_lhandle_request(char *line, int connfd)
 	** check if a built in function
 	*/
 	if (ft_strequ(argv[0], "lpwd"))
-		ft_pwd(connfd);
+		ft_pwd(sockfd);
 	else if (ft_strequ(argv[0], "lls"))
-		ft_ls(connfd);
+		ft_ls(sockfd);
 	else if (ft_strequ(argv[0], "lcd"))
-		ft_lcd(connfd, argv);
+		ft_lcd(sockfd, argv);
 	else if (ft_strequ(argv[0], "quit"))
 	{
 		ft_dstrdel(argv);
