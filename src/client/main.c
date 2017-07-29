@@ -70,11 +70,11 @@ int main(int argc, char **argv)
 			*/
 			if (!ft_lhandle_request(cmd, STDOUT_FILENO))
 			{
+				cmd = ft_wstrjoin(cmd, "\n");
 				/*
 				** send command to server
 				*/
-				ft_send_response("ls\n", sockfd);
-				// send(sockfd, "ls\n", 3, 0);
+				ft_send_response(cmd, sockfd);
 				/*
 				** read server response into buff
 				*/
@@ -86,7 +86,6 @@ int main(int argc, char **argv)
 					ft_putendl(buff);
 					ft_strdel(&buff);
 				}
-
 			}
 			ft_strdel(&cmd);
 		}

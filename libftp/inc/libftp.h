@@ -130,6 +130,7 @@ void			ft_dstrdel(char **);
 int				ft_dstrlen(char **);
 int				ft_empty(char *);
 char			*ft_add_color(char *str, char *color);
+char		    *ft_wstrjoin(char *dst, char *src);
 
 /*
 ** server/client built in command wrapper functions

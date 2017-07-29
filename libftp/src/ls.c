@@ -1,24 +1,6 @@
 #include <libftp.h>
 
 /*
-** strjoin wrapper that expects pointer that points
-** to dst must be freed
-*/
-
-static char		*ft_wstrjoin(char *dst, char *src)
-{
-	char 			*final;
-
-	final = NULL;
-	if (dst && src)
-	{
-		final = ft_strjoin(dst, src);
-		ft_strdel(&dst);
-	}
-	return (final);
-}
-
-/*
 ** read contens of a directory into a newline delimetered string
 */
 
@@ -57,7 +39,7 @@ char		*read_dir(char *dir)
 				/*
 				** add newline to last character for displaying
 				*/
-				name[ft_strlen(final)] = '\n';
+				name[ft_strlen(final)] = ' ';
 				/*
 				** append the contents to the char * along with a newline
 				*/
@@ -96,6 +78,7 @@ void		ft_ls(int fd)
 		/*
 		** set buffer (which frees dir_contents)
 		*/
+		dir_contents = ft_wstrjoin(dir_contents, "\n\r");
 		ft_send_response(dir_contents, fd);
 		ft_strdel(&dir_contents);
 	}
