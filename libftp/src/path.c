@@ -108,7 +108,13 @@ char	*ft_lpath(char *name)
 			}
 			else if (!(ft_strequ(name,"./..") == 1) && !(ft_strnequ(name,"./",1) == 1))
 			{
-				home = ft_get_environ("PWD");
+				home = ft_wgetcwd();
+				joined = ft_strnew(ft_strlen(home));
+				ft_strncpy(joined,home,ft_strlen(home) - 1);
+				ft_putstr(joined);
+				ft_strdel(&home);
+				home = ft_strdup(joined);
+				ft_strdel(&joined);
 				joined = ft_strjoin(home,"/");
 				ft_strdel(&home);
 				home = ft_strjoin(joined,name);
