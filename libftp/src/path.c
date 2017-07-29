@@ -90,7 +90,7 @@ char	*ft_lpath(char *name)
 		{
 			if (!ft_strchr(name, '/'))
 			{
-				return (ft_path(ft_strjoin("./", name)));
+				return (ft_lpath(ft_strjoin("./", name)));
 			}
 			else if (ft_strnequ(name, "~/", 1) == 1)
 			{
@@ -121,5 +121,5 @@ char	*ft_lpath(char *name)
 	{
 		name = ft_lpath("~");
 	}
-	return (name);
+	return (ft_strdup(name));
 }

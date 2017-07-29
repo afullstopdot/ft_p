@@ -54,6 +54,7 @@ int main(int argc, char **argv)
 	/*
 	** we are now connected to server, display client prompt
 	*/
+	ft_init_environ();
 	ft_display_prompt();
 	/*
 	** read from stdin
