@@ -46,6 +46,15 @@ char	*ft_path(char *name)
 				ft_strdel(&home);
 				return (joined);
 			}
+			else if (!(ft_strequ(name,"./..") == 1) && !(ft_strnequ(name,"./",1) == 1))
+			{
+				home = ft_get_environ("PWD");
+				joined = ft_strjoin(home,"/");
+				ft_strdel(&home);
+				home = ft_strjoin(joined,name);
+				ft_strdel(&joined);
+				return (home);
+			}
 		}
 	}
 	else 
@@ -96,6 +105,15 @@ char	*ft_lpath(char *name)
 				joined = ft_strjoin(home,name);
 				ft_strdel(&home);
 				return (joined);
+			}
+			else if (!(ft_strequ(name,"./..") == 1) && !(ft_strnequ(name,"./",1) == 1))
+			{
+				home = ft_get_environ("PWD");
+				joined = ft_strjoin(home,"/");
+				ft_strdel(&home);
+				home = ft_strjoin(joined,name);
+				ft_strdel(&joined);
+				return (home);
 			}
 		}
 	}

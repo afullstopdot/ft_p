@@ -27,7 +27,7 @@ void		ft_cd(int fd, char **argv)
 			/*
 			** check for Exiting Servers Home directory
 			*/
-			if (!(ft_strequ(pwd, home) == 1 && ft_strequ(path, "./..") == 1))
+			if (!(ft_strnequ(pwd, home,ft_strlen(pwd) - 2) == 1 && ft_strequ(path, "./..") == 1))
 			{
 				/*
 				** removing spaces/newlines
