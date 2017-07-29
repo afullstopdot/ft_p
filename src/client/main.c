@@ -70,6 +70,9 @@ int main(int argc, char **argv)
 			*/
 			if (!ft_lhandle_request(cmd, STDOUT_FILENO))
 			{
+				/*
+				** append newline so server readline can stop correctly
+				*/
 				cmd = ft_wstrjoin(cmd, "\n");
 				/*
 				** send command to server

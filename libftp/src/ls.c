@@ -78,7 +78,7 @@ void		ft_ls(int fd)
 		/*
 		** set buffer (which frees dir_contents)
 		*/
-		dir_contents = ft_wstrjoin(dir_contents, "\n\r");
+		dir_contents = ft_wstrjoin(dir_contents, "\n");
 		ft_send_response(dir_contents, fd);
 		ft_strdel(&dir_contents);
 	}

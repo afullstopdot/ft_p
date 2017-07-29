@@ -18,11 +18,9 @@ void	ft_display_prompt(void)
 
 	if (getcwd(cwd, 255))
 	{
-		ft_putstr("\033[0;33m");
-		ft_putstr("lcwd[");
+		ft_putstr("\033[0;35m(");
 		ft_putstr(cwd);
-		ft_putstr("]$> ");
-		ft_putstr("\033[0m");
+		ft_putstr(">)$ \033[0m");
 	}
 	else
 		ft_err_quit("getcwd fail");
