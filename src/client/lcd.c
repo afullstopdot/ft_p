@@ -19,8 +19,6 @@ void		ft_lcd(int fd, char **argv)
 			** check path for ~ or -
 			*/
 			path = ft_lpath(argv[1]);
-			ft_putstr(path);
-			ft_putstr("\n");
 			/*
 			** attempt to chang the directory
 			*/
