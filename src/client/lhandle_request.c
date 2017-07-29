@@ -26,7 +26,7 @@ int			ft_lhandle_request(char *line, int sockfd)
 	else if (ft_strequ(argv[0], "quit"))
 	{
 		ft_dstrdel(argv);
-		ft_free_environ();
+		// ft_free_environ();
 		exit(0);
 	}
 	/*

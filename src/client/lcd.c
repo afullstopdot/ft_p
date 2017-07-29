@@ -19,16 +19,18 @@ void		ft_lcd(int fd, char **argv)
 			** check path for ~ or -
 			*/
 			path = ft_lpath(argv[1]);
+			ft_putstr(path);
+			ft_putstr("\n");
 			/*
 			** attempt to chang the directory
 			*/
 			if (!ft_wchdir(path))
 			{
-				ft_send_response("ft_p: local directory changed.", fd);
+				ft_send_response("ft_p: local directory changed.\n", fd);
 			}
 			else
 			{
-				ft_send_response("ft_p: failed to change local directory.", fd);
+				ft_send_response("ft_p: failed to change local directory.\n", fd);
 			}
 			/*
 			** free path 
@@ -38,6 +40,6 @@ void		ft_lcd(int fd, char **argv)
 	}
 	else
 	{
-		ft_send_response("ft_p: failed to change local directory.", fd);
+		ft_send_response("ft_p: failed to change local directory.\n", fd);
 	}
 }
