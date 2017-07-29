@@ -73,13 +73,17 @@ int main(int argc, char **argv)
 				/*
 				** send command to server
 				*/
-				ft_send_response(cmd, sockfd);
+				ft_send_response("ls\n", sockfd);
+				// send(sockfd, "ls\n", 3, 0);
 				/*
 				** read server response into buff
 				*/
 				if ((buff = ft_wreadline(sockfd)))
 				{
-					ft_send_response(buff, STDOUT_FILENO);
+					/*
+					** handle the command
+					*/
+					ft_putendl(buff);
 					ft_strdel(&buff);
 				}
 
