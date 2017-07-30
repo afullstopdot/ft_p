@@ -46,6 +46,15 @@ char	*ft_path(char *name)
 				ft_strdel(&home);
 				return (joined);
 			}
+			else if (!(ft_strequ(name,"./..") == 1) && !(ft_strnequ(name,"./",1) == 1))
+			{
+				home = ft_get_environ("PWD");
+				joined = ft_strjoin(home,"/");
+				ft_strdel(&home);
+				home = ft_strjoin(joined,name);
+				ft_strdel(&joined);
+				return (home);
+			}
 		}
 	}
 	else 
@@ -81,7 +90,7 @@ char	*ft_lpath(char *name)
 		{
 			if (!ft_strchr(name, '/'))
 			{
-				return (ft_path(ft_strjoin("./", name)));
+				return (ft_lpath(ft_strjoin("./", name)));
 			}
 			else if (ft_strnequ(name, "~/", 1) == 1)
 			{
@@ -97,11 +106,26 @@ char	*ft_lpath(char *name)
 				ft_strdel(&home);
 				return (joined);
 			}
+			else if (!(ft_strequ(name,"./..") == 1) && !(ft_strnequ(name,"./",1) == 1))
+			{
+				home = ft_wgetcwd();
+				joined = ft_strnew(ft_strlen(home));
+				ft_strncpy(joined,home,ft_strlen(home) - 1);
+				ft_putstr(joined);
+				ft_strdel(&home);
+				home = ft_strdup(joined);
+				ft_strdel(&joined);
+				joined = ft_strjoin(home,"/");
+				ft_strdel(&home);
+				home = ft_strjoin(joined,name);
+				ft_strdel(&joined);
+				return (home);
+			}
 		}
 	}
 	else 
 	{
 		name = ft_lpath("~");
 	}
-	return (name);
+	return (ft_strdup(name));
 }

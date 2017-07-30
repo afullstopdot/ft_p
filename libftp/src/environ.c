@@ -39,9 +39,7 @@ char			*search_environ(char *curr, char *target)
 			*/
 
 			if (ft_strequ(name, target))
-			{
-
-				
+			{	
 				/*
 				** create new string with value prefixed by the '=' delimete
 				*/

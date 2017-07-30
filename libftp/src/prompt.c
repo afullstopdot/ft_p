@@ -18,7 +18,7 @@ void	ft_display_prompt(void)
 
 	if (getcwd(cwd, 255))
 	{
-		ft_putstr("\033[0;35m(");
+		ft_putstr("\033[0;35m(\033[0m\033[0;40mLOCAL\033[0m\033[0;35m");
 		ft_putstr(cwd);
 		ft_putstr(")$ \033[0m");
 	}
