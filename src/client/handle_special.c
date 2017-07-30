@@ -17,7 +17,7 @@ int			ft_handle_special(char *line, int connfd)
 		if (ft_strequ(argv[0], "put"))
 			ft_client_put(connfd, argv);
 		else if (ft_strequ(argv[0], "get"))
-			ft_client_put(connfd, argv);
+			ft_client_get(connfd, argv);
 		/*
 		** tell client if the command hs been handled here
 		*/

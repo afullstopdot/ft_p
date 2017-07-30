@@ -33,9 +33,11 @@ void           ft_server_put(int connfd, char **argv)
                 {
                     ft_wwriten(fd, buff, ft_atoi(argv[2]));
                     ft_send_response("OK\n", connfd);
+                    close(fd);
                 }
                 else
                     ft_send_response("KO\n", connfd);
+                ft_strdel(&buff);
             }
             else
                 ft_send_response("KO\n", connfd);

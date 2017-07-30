@@ -30,6 +30,7 @@
 */
 
 void    ft_server_put(int fd, char **argv);
+void    ft_server_get(int fd, char **argv);
 void	ft_cd(int fd, char **pptr);
 void	ft_invalid(int fd);
 void	ft_handle_request(char *line, int fd);
@@ -39,6 +40,7 @@ void	ft_handle_request(char *line, int fd);
 */
 
 void    ft_client_put(int fd, char **argv);
+void    ft_client_get(int fd, char **argv);
 void	ft_lcd(int fd, char **pptr);
 int		ft_lhandle_request(char *line, int fd);
 int		ft_handle_special(char *line, int connfd);
