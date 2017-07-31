@@ -72,13 +72,14 @@ t_buffer 		*ft_set_buffer(char *path)
 	size_t		file_size;
 	int			fd;
 
+	buffer = NULL;
 	if ((fd = open(path, O_RDONLY)) == -1)
 	{
 		perror("set_buffer");
 		return (NULL);
 
 	}
-	if ((file_size = ft_file_size(fd)))
+	if ((file_size = ft_file_size(fd)) != 0)
 	{
 		/*
 		** get byte stream and set buffer
