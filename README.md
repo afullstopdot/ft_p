@@ -1,11 +1,11 @@
-# Libft 
+# ft_p 
 
-Recode functions from the standard C library, and some other very useful functions that I will  be able to use all along this program, and future ones too, since as standard at WeThinkCode_ / 42. C Standard Library functions are forbidden.
-This Project challenges you to learn, and understand the inner workings of standard C library functions, in order to use them effectively in the future.
+This project is about creating a client and a FTP server (File Transfer Protocol) that
+allows you to send and receive files between one or many clients and the server.
 
 ## Getting Started
 
-To use this library for learning or use clone it locally.
+To use the server and client for learning or use clone it locally.
 
 ### Prerequisites
 
@@ -21,7 +21,7 @@ Installing just requires a clone or download
 
 
 ```
-git clone https://github.com/afullstopdot/Libft.git on terminal or download the zip straigh from here.
+git clone https://github.com/afullstopdot/ft_p.git on terminal or download the zip straight from here.
 ```
 
 ## Compiling the library
@@ -33,45 +33,75 @@ For use
 Compile the library for use, using the Makefile
 
 ```
-Make all
+make all
 ```
 
 Remove the object files
 
 ```
-Make clean
+make clean
 ```
 
 Remove the libft library
 
 ```
-Make fclean
+make fclean
 ```
 
 Remove the library and recompile
 
 ```
-Make re
+make re
 ```
 
 Additionally, for checking WeThinkCode_ / 42 norm
 
 ```
-Make norm1 && Make norm2
+make norm
 ```
 
-### 
-
-Link the library to your project
+## Server usage
 
 ```
-gcc -o executable main.c libft.a or gcc -o executable main.c -L. -lft
+./server port &
 ```
 
+Where “port” is the port number.
+
+## Client usage
+
+```
+./client server port
+```
+
+Where “server” is the name of the hosting machine on which your server is, and “port” the port number.
+
+###The client understands the following commands
+
+```
+ls : list in the current server’s directory
+```
+```
+cd : change the current server’s directory
+```
+```
+get _file_ : download the file _file_ from the server to the client
+```
+```
+put _file_ : upload the file _file_ from the client to the server
+```
+```
+pwd : display the path of the current server’s directory
+```
+```
+quit : cuts the connection + exit the program
+```
 
 ## Authors
 
 * **Andre Marques** - *All* - [afullstopdot](https://github.com/afullstopdot)
+* **goisetsi** - *All* - [goisetsi](goisetsi)
+* **** - *All* - [afullstopdot](https://github.com/afullstopdot)
 
 ## License
 
@@ -81,8 +111,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 This message pertains to the students of 42 and WTC (WeThinkCode_).
 
-This project (the first of many) is important for your development in the C language.
-It is of the utmost importance that you take this serious and and implement these functions by yourself and not by copying this work.
 Copying this work as is, without understanding and being able to implement your own work defeats the pedagogy and subsequently is cheating.
 
 Goodluck!
