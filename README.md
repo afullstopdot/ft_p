@@ -76,7 +76,7 @@ Where “port” is the port number.
 
 Where “server” is the name of the hosting machine on which your server is, and “port” the port number.
 
-###The client understands the following commands
+### The client understands the following commands
 
 ```
 ls : list in the current server’s directory
